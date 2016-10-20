@@ -10,6 +10,10 @@ namespace Player
     {
 
 
+        void CreatePlaylist()
+        {
+
+        }
 
 
 
