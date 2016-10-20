@@ -8,5 +8,20 @@ namespace Player
 {
     class gui
     {
+
+
+
+
+        void CreatePlaylist()
+        {
+
+        }
+
+
+
+
+
+
+
     }
 }
