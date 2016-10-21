@@ -15,6 +15,9 @@ namespace Player
 
         private ISoundOut _soundout;
         private IWaveSource _wavesource;
+        private List<String> _playlist;
+
+
 
         public event EventHandler<PlaybackStoppedEventArgs> PlaybackStopped;
 
@@ -92,7 +95,7 @@ namespace Player
         public void Open(string filename, MMDevice device)
         {
             CleanupPlayback();
-
+            
             _wavesource =
                 CodecFactory.Instance.GetCodec(filename)
                     .ToSampleSource()
@@ -125,6 +128,28 @@ namespace Player
             CleanupPlayback();
         }
 
+        //dodawanie do playlisty
+        public bool addToPlaylist(string newSong)
+        {
+            if (_playlist.Contains(newSong))
+            {
+                return false;
+            }
+            _playlist.Add(newSong);
+            return true;
+            
+        }
+
+        //usuwanie z playlisty
+        public bool removeFromPlaylist(string removeSong)
+        {
+            if (!_playlist.Contains(removeSong))
+            {
+                return false;
+            }
+            _playlist.Remove(removeSong);
+            return true;
+        }
 
     }
 }
