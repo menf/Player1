@@ -29,12 +29,16 @@ namespace Player
                     foreach (var device in mmdeviceCollection)
                     {
                         _devices.Add(device);
-                        Console.WriteLine(device);
                     }
                 }
-
-
-                _musicPlayer.Open(Console.ReadLine(), _devices[0]);
+                for(int i=0;i<_devices.Count;i++)
+                {
+                    Console.WriteLine(i + " " + _devices[i]);
+                }
+                Console.WriteLine("wybierz nr urządzenia");
+                int option = Int32.Parse(Console.ReadLine());
+                Console.WriteLine("Podaj sciezke do pliku");
+                _musicPlayer.Open(Console.ReadLine(), _devices[option]);
                 if (_musicPlayer.PlaybackState != PlaybackState.Playing)
                 {
                     _musicPlayer.Play();
