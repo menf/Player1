@@ -12,6 +12,7 @@ namespace Player
 {
    public class Logic : Component
     {
+
         private ISoundOut _soundout;
         private IWaveSource _wavesource;
 
