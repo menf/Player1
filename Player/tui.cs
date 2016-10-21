@@ -25,18 +25,15 @@ namespace Player
             _menu.Add(3, "Menu Item 4");
         }
 
-        public void loadInterface()
+
+        private void mainMenu()
         {
-            this.loadMenu();
-            Console.SetWindowSize(40, 45);
-            Console.SetBufferSize(40, 45);
-            Console.CursorVisible = false;
             Console.SetCursorPosition(0, _menuStartRow);
             Console.BackgroundColor = ConsoleColor.Cyan;
             Console.ForegroundColor = ConsoleColor.Black;
             foreach (var item in _menu)
             {
-                
+
                 Console.WriteLine(item.Value);
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.ForegroundColor = ConsoleColor.White;
@@ -45,20 +42,30 @@ namespace Player
             ConsoleKey key;
             do
             {
-                 key = Console.ReadKey(true).Key;
+                key = Console.ReadKey(true).Key;
                 switch (key)
                 {
                     case ConsoleKey.UpArrow:
                         this.upMenu();
-                    break;
+                        break;
 
                     case ConsoleKey.DownArrow:
                         this.downMenu();
-                    break;
+                        break;
 
 
                 }
-            }while ( key != ConsoleKey.X);
+            } while (key != ConsoleKey.X);
+        }
+
+        public void loadInterface()
+        {
+            this.loadMenu();
+            Console.SetWindowSize(40, 45);
+            Console.SetBufferSize(40, 45);
+            Console.CursorVisible = false;
+            this.mainMenu();
+           
         }
 
         private void upMenu()

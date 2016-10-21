@@ -17,6 +17,9 @@ namespace Player
         static void Main(string[] args)
         {
 
+            tui userInterface = new tui();
+            userInterface.loadInterface();
+
             /// testy dzialania
 
             Logic _musicPlayer = new Logic();
