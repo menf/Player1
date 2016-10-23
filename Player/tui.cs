@@ -79,7 +79,7 @@ namespace Player
                 DeleteMenu(sysMenu, SC_MAXIMIZE, MF_BYCOMMAND);
                 DeleteMenu(sysMenu, SC_SIZE, MF_BYCOMMAND);
             }
-            Console.CursorVisible = false;
+            Console.CursorVisible = true;
             this.mainMenu();
 
         }
@@ -95,8 +95,7 @@ namespace Player
 
         private void refreshMenu()
         {
-            Console.Clear();
-
+ 
             refreshMenuBar();
 
 
@@ -119,17 +118,20 @@ namespace Player
 
         private void clearLine()
         {
+            int c = Console.CursorTop;
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
             Console.CursorLeft = 0;
             Console.Write(new String(' ', Console.BufferWidth));
+            Console.SetCursorPosition(0, c);
         }
 
         private void clearMenu(int i)
         {
-            Console.SetCursorPosition(0, _menuStartRow);
+            
             for (int x = 0; x < i; x++)
             {
+                Console.CursorTop = _menuStartRow + x;
                 clearLine();
             }
         }
@@ -163,12 +165,13 @@ namespace Player
                         refreshMenu();
                     break;                        
                     case ConsoleKey.OemPlus:
-                        _musicPlayer.Volume += 10;
-                        _menu[4] = "Volume: " + _musicPlayer.Volume + "%";
-                        break;
+                    case ConsoleKey.Add:
+                        updateVolume(10);
+                    break;
                     case ConsoleKey.OemMinus:
-                        _musicPlayer.Volume -= 10;
-                        _menu[4] = "Volume: " + _musicPlayer.Volume + "%";
+                    case ConsoleKey.Subtract:
+                        updateVolume(-10);
+                        
                         break;
                     case ConsoleKey.Enter:
                         switch (Console.CursorTop - _menuStartRow)
@@ -350,6 +353,7 @@ namespace Player
 
             Console.SetCursorPosition(0, _menuStartRow);
             ObservableCollection<MMDevice> _devices = new ObservableCollection<MMDevice>();
+            int nbr = 0;
             using (var mmdeviceEnumerator = new MMDeviceEnumerator())
             {
                 using (
@@ -366,26 +370,34 @@ namespace Player
                     Console.WriteLine("Aktualne urządzenie:");
                     Console.WriteLine(_playerDevice);
                     Console.Write(new String(' ',Console.BufferWidth));
+                    nbr += 3;
                 }
 
                 for (int i = 0; i < _devices.Count; i++)
                 {
                     Console.WriteLine(i + " " + _devices[i]);
+                    nbr++;
                 }
                 
+
                 Console.WriteLine("Wybierz nr urządzenia: ");
                 ConsoleKeyInfo key;
                 int option = -1;
+                nbr = Console.CursorTop - _menuStartRow;
+
                 do
                 {
                     key = Console.ReadKey(true);
                     if (key.Key == ConsoleKey.F3)
                     {
+                        clearMenu(nbr);
                         return key.Key;
                     }
                     if(key.Key == ConsoleKey.F1 && _playerDevice != null)
                     {
+                        clearMenu(nbr);
                         this.selectFile();
+                        clearSelectFile();
                         return ConsoleKey.F3;
                     }
                     try
@@ -396,6 +408,7 @@ namespace Player
                     if (option >= 0 && option < _devices.Count)
                     {
                         _playerDevice = _devices[option];
+                        clearMenu(nbr);
                         return ConsoleKey.F3;
                     }
                         
@@ -403,8 +416,36 @@ namespace Player
 
                 } while (key.Key != ConsoleKey.X);
             }
-
+            clearMenu(nbr);
             return ConsoleKey.X;
+        }
+
+        private void updateVolume(int v)
+        {
+
+            if (Console.CursorTop == _menuStartRow + 4)
+            {
+                Console.BackgroundColor = ConsoleColor.Cyan;
+                Console.ForegroundColor = ConsoleColor.Black;
+            }
+            else
+            {
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            int current = Console.CursorTop;
+            _musicPlayer.Volume += v;
+            _menu[4] = "Volume: " + _musicPlayer.Volume + "%";
+            Console.SetCursorPosition(0,(_menuStartRow + 4));
+            clearLine();
+            if (current == _menuStartRow + 4)
+            {
+                Console.BackgroundColor = ConsoleColor.Cyan;
+                Console.ForegroundColor = ConsoleColor.Black;
+            }
+            Console.WriteLine(_menu[4]);
+            Console.SetCursorPosition(0, current);
+                
         }
 
         private void playMusic(String filePath)
@@ -424,7 +465,7 @@ namespace Player
                 catch (Exception e)
                 {
                     Console.Clear();
-                    Console.WriteLine("Nie można otworzyć pliku");
+                    Console.WriteLine("Nie można odnaleźć pliku");
                     Console.ReadKey(true);
                 }
             }
@@ -443,7 +484,7 @@ namespace Player
         {
 
             Console.SetCursorPosition(0, 2);
-            Console.WriteLine("Podaj sciezke do pliku:");
+            Console.WriteLine("Podaj scieżkę do pliku:");
             return Console.ReadLine();
 
 
