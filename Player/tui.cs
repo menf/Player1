@@ -38,9 +38,9 @@ namespace Player
         private int _menuStartRow;
         private MMDevice _playerDevice;
         private Logic _musicPlayer;
-        private DriveInfo[] drives;
-        private string lastDir;
-
+        private DriveInfo[] _drives;
+        private string _lastDir;
+        Dictionary<int, string> _directoryMenu;
 
         public tui()
         {
@@ -49,7 +49,8 @@ namespace Player
             this._playlistMenu = new Dictionary<int, string>();
             this._menuStartRow = 8;
             this._musicPlayer = new Logic();
-            this.drives = DriveInfo.GetDrives();
+            this._drives = DriveInfo.GetDrives();
+            this._directoryMenu = new Dictionary<int, string>;
         }
 
 
@@ -159,11 +160,11 @@ namespace Player
                 switch (key)
                 {
                     case ConsoleKey.UpArrow:
-                        upMenu(_menu);
+                        upMenu(_menu, _menuStartRow);
                         break;
 
                     case ConsoleKey.DownArrow:
-                        downMenu(_menu);
+                        downMenu(_menu, _menuStartRow);
                         break;
                     case ConsoleKey.F1:
                         clearMenu(_menu.Count);
@@ -226,36 +227,70 @@ namespace Player
 
         
 
-        private void upMenu(Dictionary<int, String> menu)
+        private void upMenu(Dictionary<int, String> menu, int start)
         {
             if (Console.CursorTop > _menuStartRow)
             {
                 Console.SetCursorPosition(0, (Console.CursorTop - 1));
                 Console.BackgroundColor = ConsoleColor.Cyan;
                 Console.ForegroundColor = ConsoleColor.Black;
-                Console.WriteLine(menu[Console.CursorTop - _menuStartRow]);
+                Console.WriteLine(menu[Console.CursorTop - start]);
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine(menu[Console.CursorTop - _menuStartRow]);
+                Console.WriteLine(menu[Console.CursorTop - start]);
                 Console.SetCursorPosition(0, (Console.CursorTop - 2));
             }
         }
-      
-        private void downMenu(Dictionary<int, String> menu)
+
+        private void upMenu(string[] menu, int start)
+        {
+            if (Console.CursorTop > _menuStartRow)
+            {
+                Console.SetCursorPosition(0, (Console.CursorTop - 1));
+                Console.BackgroundColor = ConsoleColor.Cyan;
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.WriteLine(menu[Console.CursorTop - start]);
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(menu[Console.CursorTop - start]);
+                Console.SetCursorPosition(0, (Console.CursorTop - 2));
+            }
+        }
+
+        private void downMenu(Dictionary<int, String> menu, int start)
         {
             if (Console.CursorTop < (_menuStartRow + menu.Count - 1))
             {
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.ForegroundColor = ConsoleColor.White;
 
-                Console.WriteLine(menu[Console.CursorTop - _menuStartRow]);
+                Console.WriteLine(menu[Console.CursorTop - start]);
                 Console.BackgroundColor = ConsoleColor.Cyan;
                 Console.ForegroundColor = ConsoleColor.Black;
 
-                Console.WriteLine(menu[Console.CursorTop - _menuStartRow]);
+                Console.WriteLine(menu[Console.CursorTop - start]);
                 Console.SetCursorPosition(0, (Console.CursorTop - 1));
             }
         }
+
+        private void downMenu(string[] menu, int start)
+        {
+            if (Console.CursorTop < (_menuStartRow + menu.Length - 1))
+            {
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.White;
+
+                Console.WriteLine(menu[Console.CursorTop - start]);
+                Console.BackgroundColor = ConsoleColor.Cyan;
+                Console.ForegroundColor = ConsoleColor.Black;
+
+                Console.WriteLine(menu[Console.CursorTop - start]);
+                Console.SetCursorPosition(0, (Console.CursorTop - 1));
+            }
+        }
+
+
+
         #endregion
 
         private void addToPlaylist()
@@ -264,7 +299,7 @@ namespace Player
             clearSelectFile();
             if (File.Exists(file))
             {
-                _musicPlayer.addToPlaylist(Path.GetFileName(file), file);
+                _musicPlayer.addToPlaylist(Path.GetFileNameWithoutExtension(file), file);
             }
 
         }
@@ -320,11 +355,11 @@ namespace Player
                 switch (key)
                 {
                     case ConsoleKey.UpArrow:
-                        upMenu(_playlistMenu);
+                        upMenu(_playlistMenu,_menuStartRow);
                         break;
 
                     case ConsoleKey.DownArrow:
-                        downMenu(_playlistMenu);
+                        downMenu(_playlistMenu, _menuStartRow);
                         break;
                     case ConsoleKey.F1:
                         clearMenu(_playlistMenu.Count + 1 + _musicPlayer.getPlaylist().Count);
@@ -437,18 +472,7 @@ namespace Player
             return ConsoleKey.X;
         }
 
-        private void updateTime()
-        {
-            int x = Console.CursorTop;
-            Console.SetCursorPosition(0, 2);
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.Write("TYTUL PIOSENKI ");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(String.Format(@"<{0:mm\:ss}/{1:mm\:ss}>", _musicPlayer.Position, _musicPlayer.Length));
-            Console.CursorTop = x;
-            Console.ForegroundColor = ConsoleColor.White;  
-        }
+ 
 
         private void updateVolume(int v)
         {
@@ -482,14 +506,15 @@ namespace Player
         {
             if (_playerDevice != null)
             {
-
+                
                 try
                 {
                     _musicPlayer.Open(filePath, _playerDevice);
                     if (_musicPlayer.PlaybackState != PlaybackState.Playing)
                     {
-                        updateTime();
+                        
                         timer = new Timer(Timer, null, 0, 1000);
+                        
                         _musicPlayer.Play();
 
                     }
@@ -511,7 +536,15 @@ namespace Player
                 TimeSpan length = _musicPlayer.Length;
                 if (position > length)
                     length = position;
-                updateTime();
+                int x = Console.CursorTop;
+                Console.SetCursorPosition(0, 2);
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write("TYTUL PIOSENKI ");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(String.Format(@"<{0:mm\:ss}/{1:mm\:ss}>", _musicPlayer.Position, _musicPlayer.Length));
+                Console.CursorTop = x;
+                Console.ForegroundColor = ConsoleColor.White;
 
             }
 
@@ -537,32 +570,64 @@ namespace Player
         }
 
 
-        private void directorySearch()
+
+
+        private void directorySearchThrough()
         {
 
             Console.SetCursorPosition(0, 4);
-
-            Console.WriteLine(Directory.GetCurrentDirectory());
+            _lastDir = Directory.GetCurrentDirectory();
+            
+            Console.WriteLine(_lastDir);
             Console.WriteLine("../");
-
-            string dir = "C:\\";
             try
             {
-                
-                Console.WriteLine(dir);
-                foreach (string f in Directory.GetFiles(dir))
-                    Console.WriteLine(f);
-                foreach (string d in Directory.GetDirectories(dir))
+                string[] files = Directory.GetFiles(_lastDir);
+                string[] dirs = Directory.GetDirectories(_lastDir);
+                if (files.Length <= 0 && dirs.Length <= 0)
                 {
-                    Console.WriteLine(d);
-                    // DirSearch(d);
+                    Console.WriteLine("Folder jest pusty.");
+                }
+                else
+                {
+                    foreach (string f in files)
+                    {
+                        Console.WriteLine(Path.GetFileName(f));
+                    }
+
+                    foreach (string d in dirs)
+                    {
+                        Console.WriteLine(Path.GetDirectoryName(d));
+                    }
                 }
 
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+
+            ConsoleKey key;
+            do
+            {
+                key = Console.ReadKey(true).Key;
+
+                switch (key)
+                {
+                    case ConsoleKey.UpArrow:
+                        upMenu();
+                    break;
+                    case ConsoleKey.DownArrow:
+
+                    break;
+                    case ConsoleKey.Enter:
+
+                    break;
+                }
+
+            } while (key != ConsoleKey.X);
+
+
         }
 
 
