@@ -76,8 +76,8 @@ namespace Player
         public void loadInterface()
         {
             this.loadMenus();
-            Console.SetWindowSize(50, 35);
-            Console.SetBufferSize(50, 35);
+            Console.SetWindowSize(80, 25);
+            Console.SetBufferSize(80, 25);
             Console.Title = "Music Player";
             IntPtr handle = GetConsoleWindow();
             IntPtr sysMenu = GetSystemMenu(handle, false);
@@ -87,7 +87,7 @@ namespace Player
                 DeleteMenu(sysMenu, SC_MAXIMIZE, MF_BYCOMMAND);
                 DeleteMenu(sysMenu, SC_SIZE, MF_BYCOMMAND);
             }
-            Console.CursorVisible = false;
+            Console.CursorVisible = true;
             this.mainMenu();
 
         }
@@ -230,7 +230,7 @@ namespace Player
 
         private void upMenu(Dictionary<int, String> menu, int start)
         {
-            if (Console.CursorTop > _menuStartRow)
+            if (Console.CursorTop > start)
             {
                 Console.SetCursorPosition(0, (Console.CursorTop - 1));
                 Console.BackgroundColor = ConsoleColor.Cyan;
@@ -243,24 +243,26 @@ namespace Player
             }
         }
 
-        private void upMenu(string[] menu, int start)
+        private void upFileMenu(Dictionary<int, String> menu, int start)
         {
-            if (Console.CursorTop > _menuStartRow)
+            if (Console.CursorTop > start)
             {
                 Console.SetCursorPosition(0, (Console.CursorTop - 1));
                 Console.BackgroundColor = ConsoleColor.Cyan;
                 Console.ForegroundColor = ConsoleColor.Black;
-                Console.WriteLine(menu[Console.CursorTop - start]);
+                Console.WriteLine(Path.GetFileName(menu[Console.CursorTop - start]));
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine(menu[Console.CursorTop - start]);
+                Console.WriteLine(Path.GetFileName(menu[Console.CursorTop - start]));
                 Console.SetCursorPosition(0, (Console.CursorTop - 2));
             }
         }
+
+
 
         private void downMenu(Dictionary<int, String> menu, int start)
         {
-            if (Console.CursorTop < (_menuStartRow + menu.Count - 1))
+            if (Console.CursorTop < (start + menu.Count - 1))
             {
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.ForegroundColor = ConsoleColor.White;
@@ -274,21 +276,23 @@ namespace Player
             }
         }
 
-        private void downMenu(string[] menu, int start)
+        private void downFileMenu(Dictionary<int, String> menu, int start)
         {
-            if (Console.CursorTop < (_menuStartRow + menu.Length - 1))
+            if (Console.CursorTop < (start + menu.Count - 1))
             {
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.ForegroundColor = ConsoleColor.White;
 
-                Console.WriteLine(menu[Console.CursorTop - start]);
+                Console.WriteLine(Path.GetFileName(menu[Console.CursorTop - start]));
                 Console.BackgroundColor = ConsoleColor.Cyan;
                 Console.ForegroundColor = ConsoleColor.Black;
 
-                Console.WriteLine(menu[Console.CursorTop - start]);
+                Console.WriteLine(Path.GetFileName(menu[Console.CursorTop - start]));
                 Console.SetCursorPosition(0, (Console.CursorTop - 1));
             }
         }
+
+
 
 
 
@@ -296,12 +300,14 @@ namespace Player
 
         private void addToPlaylist()
         {
-            String file = selectFile();
-            clearSelectFile();
-            if (File.Exists(file))
-            {
-                _musicPlayer.addToPlaylist(Path.GetFileNameWithoutExtension(file), file);
-            }
+            string file = directorySearchThrough();
+            _musicPlayer.addToPlaylist(Path.GetFileNameWithoutExtension(file),file);
+           // String file = selectFile();
+          //  clearSelectFile();
+          //  if (File.Exists(file))
+          //  {
+          //      _musicPlayer.addToPlaylist(Path.GetFileNameWithoutExtension(file), file);
+          //  }
 
         }
 
@@ -573,32 +579,41 @@ namespace Player
 
 
 
-        private void directorySearchThrough()
+        private String directorySearchThrough()
         {
 
             Console.SetCursorPosition(0, 4);
+            clearLine();
             _lastDir = Directory.GetCurrentDirectory();
-            
+            _directoryMenu.Clear();
+            _directoryMenu[0] = "../";
             Console.WriteLine(_lastDir);
-            Console.WriteLine("../");
+            Console.WriteLine(_directoryMenu[0]);
+            string path = null;
+            string[] files = null;
+            string[] dirs = null;
             try
             {
-                string[] files = Directory.GetFiles(_lastDir);
-                string[] dirs = Directory.GetDirectories(_lastDir);
+                files = Directory.GetFiles(_lastDir);
+                dirs = Directory.GetDirectories(_lastDir);
                 if (files.Length <= 0 && dirs.Length <= 0)
                 {
-                    Console.WriteLine("Folder jest pusty.");
+                    Console.WriteLine("Folder jest pusty."); 
                 }
                 else
                 {
+                    Console.SetBufferSize(90, 35);
                     foreach (string f in files)
                     {
                         Console.WriteLine(Path.GetFileName(f));
+                        _directoryMenu.Add(_directoryMenu.Count, f);
                     }
 
                     foreach (string d in dirs)
                     {
-                        Console.WriteLine(Path.GetDirectoryName(d));
+                        Console.WriteLine(Path.GetFileName(d));
+                        //Console.WriteLine(dirs.Length);
+                        _directoryMenu.Add(_directoryMenu.Count, d);
                     }
                 }
 
@@ -609,6 +624,7 @@ namespace Player
             }
 
             ConsoleKey key;
+            Console.SetCursorPosition(0, 5);
             do
             {
                 key = Console.ReadKey(true).Key;
@@ -616,19 +632,38 @@ namespace Player
                 switch (key)
                 {
                     case ConsoleKey.UpArrow:
-                        //upMenu();
+                        upFileMenu(_directoryMenu,5);
                     break;
                     case ConsoleKey.DownArrow:
-
+                        downFileMenu(_directoryMenu, 5);
                     break;
                     case ConsoleKey.Enter:
-
+                        if(_directoryMenu[Console.CursorTop - 5] == "../")
+                        {
+                            try {
+                                Directory.SetCurrentDirectory(Directory.GetParent(Directory.GetCurrentDirectory()).FullName);
+                            }catch (NullReferenceException e )
+                            {
+                                Console.Clear();
+                            }
+                            path = directorySearchThrough();
+                            }
+                        else if (dirs.Contains(_directoryMenu[Console.CursorTop - 5]))
+                        {
+                            Directory.SetCurrentDirectory(_directoryMenu[Console.CursorTop - 5]);
+                            path = directorySearchThrough();
+                        }
+                        else
+                        {
+                            path = _directoryMenu[Console.CursorTop - 5];
+                            return path;
+                        }
                     break;
                 }
 
             } while (key != ConsoleKey.X);
 
-
+            return path;
         }
 
 

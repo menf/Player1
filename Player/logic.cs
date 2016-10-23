@@ -17,8 +17,8 @@ namespace Player
         private IWaveSource _wavesource;
         private SortedDictionary<String,String> _playlist;
 
-
-
+        private string[] availableExtensions = { ".mp3", ".flac", ".wav", ".wma", "" };
+        
         public event EventHandler<PlaybackStoppedEventArgs> PlaybackStopped;
 
 
@@ -26,6 +26,7 @@ namespace Player
         public Logic()
         {
             _playlist = new SortedDictionary<String,String>();
+ 
         }
 
         public PlaybackState PlaybackState
@@ -47,6 +48,8 @@ namespace Player
                 return TimeSpan.Zero;
             }
         }
+
+
 
         public TimeSpan Position
         {
@@ -111,6 +114,9 @@ namespace Player
             _soundout = new WasapiOut() { Latency = 100, Device = device };
             _soundout.Initialize(_wavesource);
             if (PlaybackStopped != null) _soundout.Stopped += PlaybackStopped;
+
+            
+
         }
 
         private void CleanupPlayback()
