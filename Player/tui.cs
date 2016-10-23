@@ -14,6 +14,7 @@ namespace Player
 
     class tui 
     {
+        
         private const int MF_BYCOMMAND = 0x00000000;
         public const int SC_MAXIMIZE = 0xF030;
         public const int SC_SIZE = 0xF000;
@@ -29,6 +30,7 @@ namespace Player
 
 
         private Dictionary<int, String> _menu;
+        private Dictionary<int, String> _playlistMenu;
         private Dictionary<ConsoleKey, String> _menuBar;
         private int _menuStartRow;
         private MMDevice _playerDevice;
@@ -38,6 +40,7 @@ namespace Player
         {
             this._menu = new Dictionary<int, string>();
             this._menuBar = new Dictionary<ConsoleKey, string>();
+            this._playlistMenu = new Dictionary<int, string>();
             this._menuStartRow = 8;
             this._musicPlayer = new Logic();
         }
@@ -56,6 +59,10 @@ namespace Player
             _menuBar.Add(ConsoleKey.F1, "File (F1)");
             _menuBar.Add(ConsoleKey.F2, "Device (F2)");
             _menuBar.Add(ConsoleKey.F3, "Menu (F3)");
+
+            _playlistMenu.Add(0, "Dodaj do playlisty");
+            _playlistMenu.Add(1, "Usuń z playlisty");
+            _playlistMenu.Add(2, "Wybierz utwór");
         }
 
         public void loadInterface()
@@ -103,11 +110,26 @@ namespace Player
 
 
         
+        private void clearLine()
+        {
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.WriteLine(new String(' ', Console.BufferWidth));
+        }
 
+        private void clearMenu(int i)
+        {
+            Console.SetCursorPosition(0, _menuStartRow);
+            for (int x = 0; x < i; x++)
+            {
+                clearLine();
+            }
+        }
         private void mainMenu()
         {
 
-            this.refreshMenu();
+            refreshMenu();
             ConsoleKey key;
             do
             {
@@ -115,23 +137,30 @@ namespace Player
                 switch (key)
                 {
                     case ConsoleKey.UpArrow:
-                        this.upMenu();
+                        upMenu(_menu);
                         break;
 
                     case ConsoleKey.DownArrow:
-                        this.downMenu();
+                        downMenu(_menu);
                         break;
                     case ConsoleKey.F1:
-                        this.selectFile();
-                        this.refreshMenu();
+                        clearMenu(_menu.Count);
+                        selectFile();
+                        refreshMenu();
                     break;
                     case ConsoleKey.F2:
-                        this.selectDevice();
-                        this.refreshMenu();
+                        clearMenu(_menu.Count);
+                        selectDevice();
+                        refreshMenu();
                     break;
                     case ConsoleKey.Enter:
                         switch (Console.CursorTop - _menuStartRow)
                         {
+                            case 0:
+                                clearMenu(_menu.Count);
+                                playlistMenu();
+                                refreshMenu();
+                            break;
                             case 1:
                                 _musicPlayer.Play();
                             break;
@@ -152,40 +181,128 @@ namespace Player
 
         
 
-        private void upMenu()
+        private void upMenu(Dictionary<int, String> menu)
         {
             if (Console.CursorTop > _menuStartRow)
             {
                 Console.SetCursorPosition(0, (Console.CursorTop - 1));
                 Console.BackgroundColor = ConsoleColor.Cyan;
                 Console.ForegroundColor = ConsoleColor.Black;
-                Console.WriteLine(_menu[Console.CursorTop - _menuStartRow]);
+                Console.WriteLine(menu[Console.CursorTop - _menuStartRow]);
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine(_menu[Console.CursorTop - _menuStartRow]);
+                Console.WriteLine(menu[Console.CursorTop - _menuStartRow]);
                 Console.SetCursorPosition(0, (Console.CursorTop - 2));
             }
         }
       
-        private void downMenu()
+        private void downMenu(Dictionary<int, String> menu)
         {
-            if (Console.CursorTop < (_menuStartRow + _menu.Count - 1))
+            if (Console.CursorTop < (_menuStartRow + menu.Count - 1))
             {
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.ForegroundColor = ConsoleColor.White;
 
-                Console.WriteLine(_menu[Console.CursorTop - _menuStartRow]);
+                Console.WriteLine(menu[Console.CursorTop - _menuStartRow]);
                 Console.BackgroundColor = ConsoleColor.Cyan;
                 Console.ForegroundColor = ConsoleColor.Black;
 
-                Console.WriteLine(_menu[Console.CursorTop - _menuStartRow]);
+                Console.WriteLine(menu[Console.CursorTop - _menuStartRow]);
                 Console.SetCursorPosition(0, (Console.CursorTop - 1));
             }
         }
 #endregion
 
-        private void selectDevice()
+        private void addToPlaylist()
         {
+
+        }
+
+        private void removeFromPlaylist()
+        {
+
+        }
+
+        private void showPlaylist()
+        {
+            Console.SetCursorPosition(0,(_menuStartRow + _playlistMenu.Count + 1));
+            List<String> playlist = _musicPlayer.getPlaylist();
+            if (playlist == null)
+                Console.WriteLine("Playlista jest pusta.");
+            foreach (var item in playlist)
+            {
+                
+                Console.WriteLine(item.ToString());
+            } 
+        }
+
+       
+
+        private void playlistMenu()
+        {
+            Console.SetCursorPosition(0, _menuStartRow);
+            Console.BackgroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.Black;
+
+            foreach (var item in _playlistMenu)
+            {
+                Console.WriteLine(item.Value);
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            Console.WriteLine(new String('-', Console.BufferWidth));
+
+            showPlaylist();
+
+            Console.SetCursorPosition(0, _menuStartRow);
+
+            ConsoleKey key;
+            do
+            {
+                key = Console.ReadKey(true).Key;
+                switch (key)
+                {
+                    case ConsoleKey.UpArrow:
+                        upMenu(_playlistMenu);
+                        break;
+
+                    case ConsoleKey.DownArrow:
+                        downMenu(_playlistMenu);
+                        break;
+                    case ConsoleKey.F1:
+                        clearMenu(_playlistMenu.Count+1+_musicPlayer.getPlaylist().Count);
+                        selectFile();
+                    return;
+                    case ConsoleKey.F2:
+                        clearMenu(_playlistMenu.Count + 1 + _musicPlayer.getPlaylist().Count);
+                        key = selectDevice();
+                        break;
+                    case ConsoleKey.Enter:
+                        switch (Console.CursorTop - _menuStartRow)
+                        {
+                            case 0:
+                                //dodaj do playlisty
+                                break;
+                            case 1:
+                                //usun z playlisty
+                                break;
+                            case 2:
+                                //wybierz utwor
+                                break;
+
+                        }
+                        break;
+
+
+
+                }
+            } while (key != ConsoleKey.F3);
+        }
+
+        private ConsoleKey selectDevice()
+        {
+
+            Console.SetCursorPosition(0, _menuStartRow);
             ObservableCollection<MMDevice> _devices = new ObservableCollection<MMDevice>();
             using (var mmdeviceEnumerator = new MMDeviceEnumerator())
             {
@@ -218,12 +335,12 @@ namespace Player
                     key = Console.ReadKey(true);
                     if (key.Key == ConsoleKey.F3)
                     {
-                        return;
+                        return key.Key;
                     }
                     if(key.Key == ConsoleKey.F1 && _playerDevice != null)
                     {
                         this.selectFile();
-                        return;
+                        return ConsoleKey.F3;
                     }
                     try
                     {
@@ -233,13 +350,15 @@ namespace Player
                     if (option >= 0 && option < _devices.Count)
                     {
                         _playerDevice = _devices[option];
-                        return;
+                        return ConsoleKey.F3;
                     }
                         
 
 
                 } while (key.Key != ConsoleKey.X);
             }
+
+            return ConsoleKey.X;
         }
 
         private void selectFile()

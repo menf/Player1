@@ -21,6 +21,13 @@ namespace Player
 
         public event EventHandler<PlaybackStoppedEventArgs> PlaybackStopped;
 
+
+
+        public Logic()
+        {
+            _playlist = new List<string>();
+        }
+
         public PlaybackState PlaybackState
         {
             get
@@ -126,6 +133,13 @@ namespace Player
         {
             base.Dispose(disposing);
             CleanupPlayback();
+        }
+
+
+
+        public List<String> getPlaylist()
+        {
+            return this._playlist;
         }
 
         //dodawanie do playlisty
