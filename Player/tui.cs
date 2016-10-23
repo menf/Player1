@@ -169,7 +169,7 @@ namespace Player
                                 }
                             break;
                             case 2:
-                                if (_musicPlayer.PlaybackState == PlaybackState.Playing)
+                                if (_musicPlayer.PlaybackState != PlaybackState.Paused)
                                 {
                                     _musicPlayer.Pause();
 
@@ -177,10 +177,9 @@ namespace Player
 
                             break;
                             case 3:
-                                if (_musicPlayer.PlaybackState == PlaybackState.Playing)
+                                if (_musicPlayer.PlaybackState != PlaybackState.Stopped)
                                 {
                                     _musicPlayer.Stop();
-
                                 }
                                 break;
                         }
