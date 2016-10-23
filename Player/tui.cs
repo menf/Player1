@@ -3,6 +3,7 @@ using CSCore.SoundOut;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -63,7 +64,7 @@ namespace Player
             _menuBar.Add(ConsoleKey.F1, "File (F1)");
             _menuBar.Add(ConsoleKey.F2, "Device (F2)");
             _menuBar.Add(ConsoleKey.F3, "Menu (F3)");
-
+            _menuBar.Add(ConsoleKey.F4, "Help (F4)");
             _playlistMenu.Add(0, "Dodaj do playlisty");
             _playlistMenu.Add(1, "Usuń z playlisty");
             _playlistMenu.Add(2, "Wybierz utwór");
@@ -203,6 +204,7 @@ namespace Player
                                 if (_musicPlayer.PlaybackState != PlaybackState.Stopped)
                                 {
                                     _musicPlayer.Stop();
+                                    _musicPlayer.Position = TimeSpan.Zero;
                                 }
                                 break;
                         }
@@ -325,6 +327,8 @@ namespace Player
                         clearMenu(_playlistMenu.Count + 1 + _musicPlayer.getPlaylist().Count);
                         key = selectDevice();
                         break;
+                    case ConsoleKey.F4:
+
                     case ConsoleKey.Enter:
                         switch (Console.CursorTop - _menuStartRow)
                         {
