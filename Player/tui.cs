@@ -93,6 +93,8 @@ namespace Player
             Console.SetCursorPosition(0, 0);
             foreach (var item in _menuBar)
             {
+                Console.BackgroundColor = ConsoleColor.Cyan;
+                Console.ForegroundColor = ConsoleColor.Black;
                 Console.Write(item.Value + "    ");
             }
         }
