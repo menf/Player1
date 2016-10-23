@@ -39,6 +39,8 @@ namespace Player
         private MMDevice _playerDevice;
         private Logic _musicPlayer;
         private DriveInfo[] drives;
+        private string lastDir;
+
 
         public tui()
         {
@@ -527,7 +529,7 @@ namespace Player
         private void directorySearch()
         {
 
-            Console.SetCursorPosition(0, 2);
+            Console.SetCursorPosition(0, 4);
             string dir = "C:\\";
             try
             {
