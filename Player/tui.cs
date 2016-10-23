@@ -79,7 +79,7 @@ namespace Player
                 DeleteMenu(sysMenu, SC_MAXIMIZE, MF_BYCOMMAND);
                 DeleteMenu(sysMenu, SC_SIZE, MF_BYCOMMAND);
             }
-            Console.CursorVisible = true;
+            Console.CursorVisible = false;
             this.mainMenu();
 
         }
