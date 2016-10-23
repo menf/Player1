@@ -95,6 +95,8 @@ namespace Player
             Console.SetCursorPosition(0, 0);
             foreach (var item in _menuBar)
             {
+                Console.BackgroundColor = ConsoleColor.Cyan;
+                Console.ForegroundColor = ConsoleColor.Black;
                 Console.Write(item.Value + "    ");
             }
         }
@@ -499,11 +501,16 @@ namespace Player
 
         private  void Timer(object state)
         {
-            TimeSpan position = _musicPlayer.Position;
-            TimeSpan length = _musicPlayer.Length;
-            if (position > length)
-                length = position;
-            updateTime();
+            if (_musicPlayer.PlaybackState == PlaybackState.Playing)
+            {
+                TimeSpan position = _musicPlayer.Position;
+                TimeSpan length = _musicPlayer.Length;
+                if (position > length)
+                    length = position;
+                updateTime();
+
+            }
+
         }
 
         private void clearSelectFile()
