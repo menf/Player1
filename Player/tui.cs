@@ -55,7 +55,7 @@ namespace Player
             _menu.Add(1, "Play");
             _menu.Add(2, "Pause");
             _menu.Add(3, "Stop");
-
+            _menu.Add(4, "Volume: " + _musicPlayer.Volume +"%");
             _menuBar.Add(ConsoleKey.F1, "File (F1)");
             _menuBar.Add(ConsoleKey.F2, "Device (F2)");
             _menuBar.Add(ConsoleKey.F3, "Menu (F3)");
@@ -153,6 +153,23 @@ namespace Player
                         selectDevice();
                         refreshMenu();
                     break;
+                        
+                    case ConsoleKey.VolumeUp:
+                        _musicPlayer.Volume += 10;
+                        _menu[4] = "Volume: " + _musicPlayer.Volume + "%";
+                        break;
+                    case ConsoleKey.OemPlus:
+                        _musicPlayer.Volume += 10;
+                        _menu[4] = "Volume: " + _musicPlayer.Volume + "%";
+                        break;
+                    case ConsoleKey.VolumeDown:
+                        _musicPlayer.Volume -= 10;
+                        _menu[4] = "Volume: " + _musicPlayer.Volume + "%";
+                        break;
+                    case ConsoleKey.OemMinus:
+                        _musicPlayer.Volume -= 10;
+                        _menu[4] = "Volume: " + _musicPlayer.Volume + "%";
+                        break;
                     case ConsoleKey.Enter:
                         switch (Console.CursorTop - _menuStartRow)
                         {
