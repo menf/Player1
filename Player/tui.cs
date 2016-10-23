@@ -497,11 +497,16 @@ namespace Player
 
         private  void Timer(object state)
         {
-            TimeSpan position = _musicPlayer.Position;
-            TimeSpan length = _musicPlayer.Length;
-            if (position > length)
-                length = position;
-            updateTime();
+            if (_musicPlayer.PlaybackState == PlaybackState.Playing)
+            {
+                TimeSpan position = _musicPlayer.Position;
+                TimeSpan length = _musicPlayer.Length;
+                if (position > length)
+                    length = position;
+                updateTime();
+
+            }
+
         }
 
         private void clearSelectFile()
