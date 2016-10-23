@@ -50,7 +50,7 @@ namespace Player
             this._menuStartRow = 8;
             this._musicPlayer = new Logic();
             this._drives = DriveInfo.GetDrives();
-            this._directoryMenu = new Dictionary<int, string>;
+            this._directoryMenu = new Dictionary<int, string>();
         }
 
 
@@ -616,7 +616,7 @@ namespace Player
                 switch (key)
                 {
                     case ConsoleKey.UpArrow:
-                        upMenu();
+                        //upMenu();
                     break;
                     case ConsoleKey.DownArrow:
 
