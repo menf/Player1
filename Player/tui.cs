@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Player
@@ -19,7 +20,7 @@ namespace Player
         private const int MF_BYCOMMAND = 0x00000000;
         public const int SC_MAXIMIZE = 0xF030;
         public const int SC_SIZE = 0xF000;
-
+        Timer timer;
         [DllImport("user32.dll")]
         public static extern int DeleteMenu(IntPtr hMenu, int nPosition, int wFlags);
 
@@ -417,6 +418,7 @@ namespace Player
                     _musicPlayer.Open(filePath, _playerDevice);
                     if (_musicPlayer.PlaybackState != PlaybackState.Playing)
                     {
+                        timer = new Timer(Timer, null, 0, 1000);
                         _musicPlayer.Play();
 
                     }
@@ -429,7 +431,14 @@ namespace Player
                 }
             }
         }
-
+        private  void Timer(object state)
+        {
+            TimeSpan position = _musicPlayer.Position;
+            TimeSpan length = _musicPlayer.Length;
+            if (position > length)
+                length = position;
+           Console.WriteLine(String.Format(@"{0:mm\:ss} / {1:mm\:ss}", position, length));
+        }
         private void clearSelectFile()
         {
             Console.SetCursorPosition(0, 2);
