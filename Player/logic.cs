@@ -15,7 +15,7 @@ namespace Player
 
         private ISoundOut _soundout;
         private IWaveSource _wavesource;
-        private List<String> _playlist;
+        private SortedDictionary<String,String> _playlist;
 
 
 
@@ -25,7 +25,7 @@ namespace Player
 
         public Logic()
         {
-            _playlist = new List<string>();
+            _playlist = new SortedDictionary<String,String>();
         }
 
         public PlaybackState PlaybackState
@@ -137,19 +137,19 @@ namespace Player
 
 
 
-        public List<String> getPlaylist()
+        public SortedDictionary<String,String> getPlaylist()
         {
             return this._playlist;
         }
 
         //dodawanie do playlisty
-        public bool addToPlaylist(string newSong)
+        public bool addToPlaylist(string newSong, string filepath)
         {
-            if (_playlist.Contains(newSong))
+            if (_playlist.ContainsKey(newSong))
             {
                 return false;
             }
-            _playlist.Add(newSong);
+            _playlist.Add(newSong,filepath);
             return true;
             
         }
@@ -157,7 +157,7 @@ namespace Player
         //usuwanie z playlisty
         public bool removeFromPlaylist(string removeSong)
         {
-            if (!_playlist.Contains(removeSong))
+            if (!_playlist.ContainsKey(removeSong))
             {
                 return false;
             }

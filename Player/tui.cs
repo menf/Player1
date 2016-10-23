@@ -7,7 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.IO;
 namespace Player
 {
 
@@ -83,15 +83,22 @@ namespace Player
 
         }
 
+
+        private void refreshMenuBar()
+        {
+            Console.SetCursorPosition(0, 0);
+            foreach (var item in _menuBar) 
+            {
+                Console.Write(item.Value + "    ");
+            }
+        }
+
         private void refreshMenu()
         {
             Console.Clear();
 
-
-            foreach (var item in _menuBar)
-            {
-                Console.Write(item.Value + "    ");
-            }
+            refreshMenuBar();
+           
 
             Console.SetCursorPosition(0, _menuStartRow);
             Console.BackgroundColor = ConsoleColor.Cyan;
@@ -114,10 +121,10 @@ namespace Player
         {
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
-            Console.SetCursorPosition(0, Console.CursorTop);
-            Console.WriteLine(new String(' ', Console.BufferWidth));
+            Console.CursorLeft = 0;
+            Console.Write(new String(' ', Console.BufferWidth));
         }
-
+        
         private void clearMenu(int i)
         {
             Console.SetCursorPosition(0, _menuStartRow);
@@ -145,7 +152,7 @@ namespace Player
                         break;
                     case ConsoleKey.F1:
                         clearMenu(_menu.Count);
-                        selectFile();
+                        playMusic(selectFile());
                         refreshMenu();
                     break;
                     case ConsoleKey.F2:
@@ -215,7 +222,11 @@ namespace Player
 
         private void addToPlaylist()
         {
-
+            String file = selectFile();
+            if (File.Exists(file))
+            {
+                _musicPlayer.addToPlaylist(Path.GetFileName(file),file);
+            }
         }
 
         private void removeFromPlaylist()
@@ -226,19 +237,19 @@ namespace Player
         private void showPlaylist()
         {
             Console.SetCursorPosition(0,(_menuStartRow + _playlistMenu.Count + 1));
-            List<String> playlist = _musicPlayer.getPlaylist();
+            SortedDictionary<String,String> playlist = _musicPlayer.getPlaylist();
             if (playlist == null)
                 Console.WriteLine("Playlista jest pusta.");
             foreach (var item in playlist)
             {
                 
-                Console.WriteLine(item.ToString());
+                Console.WriteLine(item.Key.ToString());
             } 
         }
 
-       
 
-        private void playlistMenu()
+
+        private void refreshPlaylistMenu()
         {
             Console.SetCursorPosition(0, _menuStartRow);
             Console.BackgroundColor = ConsoleColor.Cyan;
@@ -255,6 +266,11 @@ namespace Player
             showPlaylist();
 
             Console.SetCursorPosition(0, _menuStartRow);
+        }
+
+        private void playlistMenu()
+        {
+            refreshPlaylistMenu();
 
             ConsoleKey key;
             do
@@ -271,7 +287,7 @@ namespace Player
                         break;
                     case ConsoleKey.F1:
                         clearMenu(_playlistMenu.Count+1+_musicPlayer.getPlaylist().Count);
-                        selectFile();
+                        playMusic(selectFile());
                     return;
                     case ConsoleKey.F2:
                         clearMenu(_playlistMenu.Count + 1 + _musicPlayer.getPlaylist().Count);
@@ -282,12 +298,17 @@ namespace Player
                         {
                             case 0:
                                 //dodaj do playlisty
+                                clearMenu(_playlistMenu.Count + 1 + _musicPlayer.getPlaylist().Count);
+                                addToPlaylist();
+                                refreshPlaylistMenu();
                                 break;
                             case 1:
                                 //usun z playlisty
+                                refreshPlaylistMenu();
                                 break;
                             case 2:
                                 //wybierz utwor
+                                refreshPlaylistMenu();
                                 break;
 
                         }
@@ -361,35 +382,45 @@ namespace Player
             return ConsoleKey.X;
         }
 
-        private void selectFile()
-        {
-            if (_playerDevice == null)
-            {
-                this.selectDevice();
-            }
 
+        private void playMusic(String filePath)
+        {
             if (_playerDevice != null)
             {
-                Console.Clear();
-                Console.WriteLine("Podaj sciezke do pliku:");
+
                 try
                 {
-                    _musicPlayer.Open(Console.ReadLine(), _playerDevice);
+                    _musicPlayer.Open(filePath, _playerDevice);
                     if (_musicPlayer.PlaybackState != PlaybackState.Playing)
                     {
                         _musicPlayer.Play();
 
                     }
-            }catch (Exception e)
-            {
-
-                Console.WriteLine("Nie można otworzyć pliku");
-                Console.ReadKey(true);
+                }
+                catch (Exception e)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Nie można otworzyć pliku");
+                    Console.ReadKey(true);
+                }
             }
-
-        }
         }
 
+        private void clearSelectFile()
+        {
+            Console.SetCursorPosition(0, 2);
+        }
 
+        private String selectFile()
+        {
+
+            Console.SetCursorPosition(0, 2);
+                Console.WriteLine("Podaj sciezke do pliku:");
+                return Console.ReadLine();
+
+            
+
+        }
+        
     }
 }
