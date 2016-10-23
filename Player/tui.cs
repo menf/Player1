@@ -152,18 +152,9 @@ namespace Player
                         clearMenu(_menu.Count);
                         selectDevice();
                         refreshMenu();
-                    break;
-                        
-                    case ConsoleKey.VolumeUp:
-                        _musicPlayer.Volume += 10;
-                        _menu[4] = "Volume: " + _musicPlayer.Volume + "%";
-                        break;
+                    break;                        
                     case ConsoleKey.OemPlus:
                         _musicPlayer.Volume += 10;
-                        _menu[4] = "Volume: " + _musicPlayer.Volume + "%";
-                        break;
-                    case ConsoleKey.VolumeDown:
-                        _musicPlayer.Volume -= 10;
                         _menu[4] = "Volume: " + _musicPlayer.Volume + "%";
                         break;
                     case ConsoleKey.OemMinus:
