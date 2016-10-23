@@ -77,6 +77,7 @@ namespace Player
             this.loadMenus();
             Console.SetWindowSize(50, 35);
             Console.SetBufferSize(50, 35);
+            Console.Title = "Music Player";
             IntPtr handle = GetConsoleWindow();
             IntPtr sysMenu = GetSystemMenu(handle, false);
 
