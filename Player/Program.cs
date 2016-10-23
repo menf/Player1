@@ -8,7 +8,7 @@ using CSCore.CoreAudioAPI;
 using CSCore.SoundOut;
 using CSCore.Streams;
 using System.Collections.ObjectModel;
-using CursesSharp;
+//using CursesSharp;
 
 namespace Player
 {

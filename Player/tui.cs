@@ -162,14 +162,27 @@ namespace Player
                                 refreshMenu();
                             break;
                             case 1:
-                                _musicPlayer.Play();
+                                if (_musicPlayer.PlaybackState != PlaybackState.Playing)
+                                {
+                                    _musicPlayer.Play();
+
+                                }
                             break;
                             case 2:
-                                _musicPlayer.Pause();
+                                if (_musicPlayer.PlaybackState == PlaybackState.Playing)
+                                {
+                                    _musicPlayer.Pause();
+
+                                }
+
                             break;
                             case 3:
-                                _musicPlayer.Stop();
-                            break;
+                                if (_musicPlayer.PlaybackState == PlaybackState.Playing)
+                                {
+                                    _musicPlayer.Stop();
+
+                                }
+                                break;
                         }
                     break;
                     
@@ -375,11 +388,7 @@ namespace Player
                 try
                 {
                     _musicPlayer.Open(Console.ReadLine(), _playerDevice);
-                    if (_musicPlayer.PlaybackState != PlaybackState.Playing)
-                    {
-                        _musicPlayer.Play();
-
-                    }
+                  
             }catch (Exception e)
             {
 
