@@ -37,6 +37,7 @@ namespace Player
         private int _menuStartRow;
         private MMDevice _playerDevice;
         private Logic _musicPlayer;
+        private DriveInfo[] drives;
 
         public tui()
         {
@@ -45,6 +46,7 @@ namespace Player
             this._playlistMenu = new Dictionary<int, string>();
             this._menuStartRow = 8;
             this._musicPlayer = new Logic();
+            this.drives = DriveInfo.GetDrives();
         }
 
 
@@ -303,6 +305,7 @@ namespace Player
             ConsoleKey key;
             do
             {
+
                 key = Console.ReadKey(true).Key;
                 switch (key)
                 {
@@ -347,6 +350,7 @@ namespace Player
 
                 }
             } while (key != ConsoleKey.F3);
+            clearMenu(_playlistMenu.Count + 1 + _musicPlayer.getPlaylist().Count);
         }
 
         private ConsoleKey selectDevice()
@@ -421,6 +425,19 @@ namespace Player
             return ConsoleKey.X;
         }
 
+        private void updateTime()
+        {
+            int x = Console.CursorTop;
+            Console.SetCursorPosition(0, 2);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Write("TYTUL PIOSENKI ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(String.Format(@"<{0:mm\:ss}/{1:mm\:ss}>", _musicPlayer.Position, _musicPlayer.Length));
+            Console.CursorTop = x;
+            Console.ForegroundColor = ConsoleColor.White;  
+        }
+
         private void updateVolume(int v)
         {
 
@@ -459,6 +476,7 @@ namespace Player
                     _musicPlayer.Open(filePath, _playerDevice);
                     if (_musicPlayer.PlaybackState != PlaybackState.Playing)
                     {
+                        updateTime();
                         timer = new Timer(Timer, null, 0, 1000);
                         _musicPlayer.Play();
 
@@ -472,33 +490,66 @@ namespace Player
                 }
             }
         }
+
         private  void Timer(object state)
         {
             TimeSpan position = _musicPlayer.Position;
             TimeSpan length = _musicPlayer.Length;
             if (position > length)
                 length = position;
-           Console.WriteLine(String.Format(@"{0:mm\:ss} / {1:mm\:ss}", position, length));
+            updateTime();
         }
+
         private void clearSelectFile()
         {
-            Console.SetCursorPosition(0, 2);
-            for(int i = 0; i < 2; i++)
-            {
-                clearLine();
-            }
+            Console.SetCursorPosition(0, 4);
+            clearLine();
+            Console.CursorTop = 5;
+            clearLine();
         }
 
         private String selectFile()
         {
 
-            Console.SetCursorPosition(0, 2);
+            Console.SetCursorPosition(0, 4);
             Console.WriteLine("Podaj scieżkę do pliku:");
             return Console.ReadLine();
 
 
 
         }
+
+
+
+
+
+
+
+        private void directorySearch()
+        {
+
+            Console.SetCursorPosition(0, 2);
+            string dir = "C:\\";
+            try
+            {
+                
+                Console.WriteLine(dir);
+                foreach (string f in Directory.GetFiles(dir))
+                    Console.WriteLine(f);
+                foreach (string d in Directory.GetDirectories(dir))
+                {
+                    Console.WriteLine(d);
+                    // DirSearch(d);
+                }
+
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+
 
 
     }

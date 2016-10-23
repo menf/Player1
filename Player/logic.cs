@@ -83,7 +83,7 @@ namespace Player
         public void Play()
         {
             if (_soundout != null)
-                _soundout.Play();
+                _soundout.Play();  
         }
 
         public void Pause()
