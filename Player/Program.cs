@@ -24,7 +24,7 @@ namespace Player
             userInterface.loadInterface();
 
             /// testy dzialania
-
+            
 
             Console.ReadLine();
         }

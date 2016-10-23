@@ -93,12 +93,16 @@ namespace Player
         private void refreshMenuBar()
         {
             Console.SetCursorPosition(0, 0);
+            Console.BackgroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.Black;
             foreach (var item in _menuBar)
-            {
-                Console.BackgroundColor = ConsoleColor.Cyan;
-                Console.ForegroundColor = ConsoleColor.Black;
+            { 
                 Console.Write(item.Value + "    ");
             }
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.CursorLeft = Console.CursorLeft - 4;
+            Console.Write("    ");
         }
 
         private void refreshMenu()
@@ -537,6 +541,10 @@ namespace Player
         {
 
             Console.SetCursorPosition(0, 4);
+
+            Console.WriteLine(Directory.GetCurrentDirectory());
+            Console.WriteLine("../");
+
             string dir = "C:\\";
             try
             {
