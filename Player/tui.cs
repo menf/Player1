@@ -333,17 +333,20 @@ namespace Player
 
         private void loadPlaylist()
         {
-            //Console.Write(File.Exists("/playlist.cyk"));
-            //Console.ReadKey();
-            if (File.Exists(@"playlist.cyk"))
-            {
-                string[] plist = File.ReadAllLines(@"playlist.cyk");
-                if(plist.Length > 0)
+
+            string[] plist = Properties.Resources.playlist.Split('\n');
+            
+                if (plist.Length > 0)
                 {
                     for (int i = 0; i < plist.Length; i++)
-                        _musicPlayer.addToPlaylist(Path.GetFileNameWithoutExtension(plist[i]),plist[i]);
+                {
+                    plist[i].Replace("\\", "\\\\");
+                    _musicPlayer.addToPlaylist(Path.GetFileNameWithoutExtension(plist[i]),plist[i]);
+
                 }
-            }
+                       
+                }
+            
         }
 
 
@@ -369,6 +372,7 @@ namespace Player
         {
             Console.SetCursorPosition(0, (_menuStartRow + _playlistMenu.Count + 1));
             SortedDictionary<String, String> playlist = _musicPlayer.getPlaylist();
+            
             if (playlist == null)
                 Console.WriteLine("Playlista jest pusta.");
             foreach (var item in playlist)
