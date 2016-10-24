@@ -524,6 +524,8 @@ namespace Player
         }
 
 
+
+
         private void selectDrive()
         {
             shown = 0;
@@ -607,7 +609,7 @@ namespace Player
             string path = null;
             string[] files = null;
             string[] dirs = null;
-            string[] shownDirs = null;
+            //string[] shownDirs = null;
 
                 try
                 {
@@ -672,9 +674,12 @@ namespace Player
                     case ConsoleKey.DownArrow:
                         downFileMenu(_directoryMenu, 5);
                     break;
+                    case ConsoleKey.F3:
+
+                    break;
                     case ConsoleKey.Enter:
                         clearDirectorySearch(_directoryMenu.Count()+1);
-                        if (_directoryMenu[Console.CursorTop - 5] == "../")
+                        if (_directoryMenu[Console.CursorTop - 5 - shown] == "../")
                         {
                             try {
                                 Directory.SetCurrentDirectory(Directory.GetParent(Directory.GetCurrentDirectory()).FullName);
@@ -684,9 +689,9 @@ namespace Player
                             }
                             return directorySearchThrough();
                         }
-                        else if (dirs.Contains(_directoryMenu[Console.CursorTop - 5]))
+                        else if (dirs.Contains(_directoryMenu[Console.CursorTop - 5 - shown]))
                         {
-                            Directory.SetCurrentDirectory(_directoryMenu[Console.CursorTop - 5]);
+                            Directory.SetCurrentDirectory(_directoryMenu[Console.CursorTop - 5 - shown]);
                            return directorySearchThrough();
                         }
                         else
