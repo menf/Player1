@@ -90,6 +90,9 @@ namespace Player
                 DeleteMenu(sysMenu, SC_SIZE, MF_BYCOMMAND);
             }
             Console.CursorVisible = true;
+
+            selectDevice();
+
             this.mainMenu(); 
         }
 
