@@ -17,7 +17,6 @@ namespace Player
         private IWaveSource _wavesource;
         private Dictionary<String,String> _playlist;
         private string name;
-        private string[] availableExtensions = { ".mp3", ".flac", ".wav", ".wma", ".ogg", };
         
         public event EventHandler<PlaybackStoppedEventArgs> PlaybackStopped;
 

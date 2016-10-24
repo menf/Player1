@@ -40,18 +40,18 @@ namespace Player
         private Logic _musicPlayer;
         private DriveInfo[] _drives;
         private string _lastDir;
+        private int vol;
         Dictionary<int, string> _directoryMenu;
 
         public tui()
         {
             this._menu = new Dictionary<int, string>();
             this._menuBar = new Dictionary<ConsoleKey, string>();
-            this._playlistMenu = new Dictionary<int, string>();
             this._menuStartRow = 8;
             this._musicPlayer = new Logic();
             this._drives = DriveInfo.GetDrives();
             this._directoryMenu = new Dictionary<int, string>();
-            
+            vol = 100;
         }
 
 
@@ -60,19 +60,15 @@ namespace Player
 
         private void loadMenus()
         {
-            _menu.Add(0, "Playlist");
-            _menu.Add(1, "Play");
-            _menu.Add(2, "Pause");
-            _menu.Add(3, "Stop");
-            _menu.Add(4, "Volume: " + _musicPlayer.Volume +"%");
+            _menu.Add(0, "Play");
+            _menu.Add(1, "Pause");
+            _menu.Add(2, "Stop");
+            _menu.Add(3, "Volume: " + _musicPlayer.Volume +"%");
             _menuBar.Add(ConsoleKey.F1, "File (F1)");
             _menuBar.Add(ConsoleKey.F2, "Device (F2)");
             _menuBar.Add(ConsoleKey.F3, "Menu (F3)");
             _menuBar.Add(ConsoleKey.F4, "Help (F4)");
-            _playlistMenu.Add(0, "Dodaj do playlisty");
-            _playlistMenu.Add(1, "Usuń z playlisty");
-            _playlistMenu.Add(2, "Wybierz utwór");
-            _playlistMenu.Add(3, "Odtwórz playlistę");
+
         }
 
         public void loadInterface()
@@ -92,7 +88,6 @@ namespace Player
             Console.CursorVisible = true;
 
             selectDevice();
-            loadPlaylist();
             this.mainMenu(); 
         }
 
@@ -195,18 +190,13 @@ namespace Player
                         switch (Console.CursorTop - _menuStartRow)
                         {
                             case 0:
-                                clearMenu(_menu.Count);
-                                playlistMenu();
-                                refreshMenu();
-                            break;
-                            case 1:
                                 if (_musicPlayer.PlaybackState != PlaybackState.Playing)
                                 {
                                     _musicPlayer.Play();
 
                                 }
                             break;
-                            case 2:
+                            case 1:
                                 if (_musicPlayer.PlaybackState != PlaybackState.Paused)
                                 {
                                     _musicPlayer.Pause();
@@ -214,7 +204,7 @@ namespace Player
                                 }
 
                             break;
-                            case 3:
+                            case 2:
                                 if (_musicPlayer.PlaybackState != PlaybackState.Stopped)
                                 {
                                     _musicPlayer.Stop();
@@ -334,147 +324,9 @@ namespace Player
 
         #endregion
 
-        private void loadPlaylist()
-        {
-            //Console.Write(File.Exists("/playlist.cyk"));
-            //Console.ReadKey();
-            if (File.Exists(@"playlist.cyk"))
-            {
-                string[] plist = File.ReadAllLines(@"playlist.cyk");
-                if(plist.Length > 0)
-                {
-                    for (int i = 0; i < plist.Length; i++)
-                        _musicPlayer.addToPlaylist(Path.GetFileNameWithoutExtension(plist[i]),plist[i]);
-                }
-            }
-        }
+  
 
 
-        private void addToPlaylist()
-        {
-           // string file = directorySearchThrough();
-        //    _musicPlayer.addToPlaylist(Path.GetFileNameWithoutExtension(file),file);
-            String file = selectFile();
-            clearSelectFile();
-            if (File.Exists(file))
-            {
-                _musicPlayer.addToPlaylist(Path.GetFileNameWithoutExtension(file), file);
-           }
-
-        }
-
-        private void removeFromPlaylist()
-        {
-
-        }
-
-        private void showPlaylist()
-        {
-            Console.SetCursorPosition(0, (_menuStartRow + _playlistMenu.Count + 1));
-            Dictionary<String, String> playlist = _musicPlayer.getPlaylist();
-            if (playlist == null)
-                Console.WriteLine("Playlista jest pusta.");
-            foreach (var item in playlist)
-            {
-                Console.WriteLine(item.Key.ToString());
-            }
-        }
-
-       
-
-        private void refreshPlaylistMenu()
-        {
-            Console.SetCursorPosition(0, _menuStartRow);
-            Console.BackgroundColor = ConsoleColor.Cyan;
-            Console.ForegroundColor = ConsoleColor.Black;
-
-            foreach (var item in _playlistMenu)
-            {
-                Console.WriteLine(item.Value);
-                Console.BackgroundColor = ConsoleColor.Black;
-                Console.ForegroundColor = ConsoleColor.White;
-            }
-            Console.WriteLine(new String('-', Console.BufferWidth));
-
-            showPlaylist();
-
-            Console.SetCursorPosition(0, _menuStartRow);
-        }
-
-        private void playlistPlay()
-        {
-            Dictionary<String, String> playlist = _musicPlayer.getPlaylist();
-            string name, path;
-            if (playlist.Count > 0)
-            {
-                name = playlist.First().Key;
-                path = playlist.First().Value;
-                playMusic(path);
-                _musicPlayer.Name = name;
-                playlist.Remove(name);
-                playlist.Add(name, path);
-            }
-        }
-
-        private void playlistMenu()
-        {
-            refreshPlaylistMenu();
-
-            ConsoleKey key;
-            do
-            {
-
-                key = Console.ReadKey(true).Key;
-                switch (key)
-                {
-                    case ConsoleKey.UpArrow:
-                        upMenu(_playlistMenu,_menuStartRow);
-                        break;
-
-                    case ConsoleKey.DownArrow:
-                        downMenu(_playlistMenu, _menuStartRow);
-                        break;
-                    case ConsoleKey.F1:
-                        clearMenu(_playlistMenu.Count + 1 + _musicPlayer.getPlaylist().Count);
-                        playMusic(selectFile());
-                        clearSelectFile();
-                        return;
-                    case ConsoleKey.F2:
-                        clearMenu(_playlistMenu.Count + 1 + _musicPlayer.getPlaylist().Count);
-                        key = selectDevice();
-                        break;
-                    case ConsoleKey.F4:
-
-                    case ConsoleKey.Enter:
-                        switch (Console.CursorTop - _menuStartRow)
-                        {
-                            case 0:
-                                //dodaj do playlisty
-                                clearMenu(_playlistMenu.Count + 1 + _musicPlayer.getPlaylist().Count);
-                                addToPlaylist();
-                                refreshPlaylistMenu();
-                                break;
-                            case 1:
-                                //usun z playlisty
-                                refreshPlaylistMenu();
-                                break;
-                            case 2:
-                                //wybierz utwor
-                                refreshPlaylistMenu();
-                                break;
-                            case 3:
-                                //gramy
-                                playlistPlay();
-                                break;
-                        }
-                        break;
-
-
-
-                }
-            } while (key != ConsoleKey.F3);
-            clearMenu(_playlistMenu.Count + 1 + _musicPlayer.getPlaylist().Count);
-        }
 
         private ConsoleKey selectDevice()
         {
@@ -553,7 +405,7 @@ namespace Player
         private void updateVolume(int v)
         {
 
-            if (Console.CursorTop == _menuStartRow + 4)
+            if (Console.CursorTop == _menuStartRow + 3)
             {
                 Console.BackgroundColor = ConsoleColor.Cyan;
                 Console.ForegroundColor = ConsoleColor.Black;
@@ -564,16 +416,17 @@ namespace Player
                 Console.ForegroundColor = ConsoleColor.White;
             }
             int current = Console.CursorTop;
-            _musicPlayer.Volume += v;
-            _menu[4] = "Volume: " + _musicPlayer.Volume + "%";
-            Console.SetCursorPosition(0,(_menuStartRow + 4));
+            vol = _musicPlayer.Volume + v;
+            _musicPlayer.Volume = vol;
+            _menu[3] = "Volume: " + _musicPlayer.Volume + "%";
+            Console.SetCursorPosition(0,(_menuStartRow + 3));
             clearLine();
-            if (current == _menuStartRow + 4)
+            if (current == _menuStartRow + 3)
             {
                 Console.BackgroundColor = ConsoleColor.Cyan;
                 Console.ForegroundColor = ConsoleColor.Black;
             }
-            Console.WriteLine(_menu[4]);
+            Console.WriteLine(_menu[3]);
             Console.SetCursorPosition(0, current);
                 
         }
@@ -607,10 +460,12 @@ namespace Player
 
         private  void Timer(object state)
         {
+            _musicPlayer.Volume = vol;
             if (_musicPlayer.PlaybackState == PlaybackState.Playing)
             {
                 TimeSpan position = _musicPlayer.Position;
                 TimeSpan length = _musicPlayer.Length;
+                
                 if (position > length)
                     length = position;
                 int l = Console.CursorLeft;
