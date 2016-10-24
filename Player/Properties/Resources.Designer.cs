@@ -61,7 +61,8 @@ namespace Player.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to dfds.
+        ///   Looks up a localized string similar to C:\Users\Public\Music\Sample Music\Kalimba.mp3
+        ///C:\Users\Public\Music\Sample Music\Sleep Away.mp3.
         /// </summary>
         internal static string playlist {
             get {
@@ -84,15 +85,6 @@ namespace Player.Properties {
         internal static string readme {
             get {
                 return ResourceManager.GetString("readme", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string settings {
-            get {
-                return ResourceManager.GetString("settings", resourceCulture);
             }
         }
     }

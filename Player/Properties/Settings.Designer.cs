@@ -22,5 +22,95 @@ namespace Player.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int backgroud {
+            get {
+                return ((int)(this["backgroud"]));
+            }
+            set
+            {
+                this["backgroud"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("11")]
+        public int barcolor {
+            get {
+                return ((int)(this["barcolor"]));
+            }
+            set
+            {
+                this["barcolor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        public int barfontcolor {
+            get {
+                return ((int)(this["barfontcolor"]));
+            }
+            set
+            {
+                this["barfontcolor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int timercolor {
+            get {
+                return ((int)(this["timercolor"]));
+            }
+            set
+            {
+                this["timercolor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int menufontcolor {
+            get {
+                return ((int)(this["menufontcolor"]));
+            }
+            set
+            {
+                this["menufontcolor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("11")]
+        public int prompt {
+            get {
+                return ((int)(this["prompt"]));
+            }
+            set
+            {
+                this["prompt"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        public int foreground {
+            get {
+                return ((int)(this["foreground"]));
+            }
+            set {
+                this["foreground"] = value;
+            }
+        }
     }
 }
