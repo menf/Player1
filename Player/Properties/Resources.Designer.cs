@@ -61,6 +61,15 @@ namespace Player.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to dfds.
+        /// </summary>
+        internal static string playlist {
+            get {
+                return ResourceManager.GetString("playlist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Skróty klawiszowe:
         ///+ volume up
         ///- volume down
@@ -69,12 +78,21 @@ namespace Player.Properties {
         ///F3 Menu
         ///
         ///UWAGA:
-        ///Przed wybraniem plików do odsłuchu należy wybrac aktywne urządzenie do odsłuchu!
+        ///Przed wybraniem plików do odsłuchu należy wybrac aktywne urzšdzenie do odsłuchu!
         ///.
         /// </summary>
         internal static string readme {
             get {
                 return ResourceManager.GetString("readme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string settings {
+            get {
+                return ResourceManager.GetString("settings", resourceCulture);
             }
         }
     }
