@@ -97,7 +97,7 @@ namespace Player
         {
             Console.SetCursorPosition(0, 0);
             Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.barcolor;
-            Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
+            Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.barfontcolor;
             foreach (var item in _menuBar)
             { 
                 Console.Write(item.Value + "    ");
@@ -115,7 +115,7 @@ namespace Player
 
 
             Console.SetCursorPosition(0, _menuStartRow);
-            Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.barcolor;
+            Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
             Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
 
 
