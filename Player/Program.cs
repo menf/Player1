@@ -22,7 +22,7 @@ namespace Player
             
             tui userInterface = new tui();
             userInterface.loadInterface();
-
+            
             /// testy dzialania
             
 

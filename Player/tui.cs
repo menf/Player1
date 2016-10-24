@@ -613,11 +613,13 @@ namespace Player
 
         private void clearDirectorySearch(int i)
         {
+            int t = Console.CursorTop;
             for (int x = 0; x < i; x++)
             {
                 Console.CursorTop = 4 + x;
                 clearLine();
             }
+            Console.SetCursorPosition(0, t);
         }
 
 
@@ -679,7 +681,7 @@ namespace Player
             string path = null;
             string[] files = null;
             string[] dirs = null;
-            // string[] shownDirs = null;
+            string[] shownDirs = null;
 
                 try
                 {
@@ -692,7 +694,7 @@ namespace Player
                     }
                     else
                     {
-                        Console.SetBufferSize(90, 35);
+                        Console.SetBufferSize(80, 35);
                         foreach (string f in files)
                         {
                             Console.WriteLine(Path.GetFileName(f));
@@ -701,6 +703,7 @@ namespace Player
 
                         foreach (string d in dirs)
                         {
+                        
                             Console.WriteLine(Path.GetFileName(d));
                             _directoryMenu.Add(_directoryMenu.Count, d);
                         }
@@ -731,26 +734,27 @@ namespace Player
                         downFileMenu(_directoryMenu, 5);
                     break;
                     case ConsoleKey.Enter:
-                        if(_directoryMenu[Console.CursorTop - 5] == "../")
+                        clearDirectorySearch(_directoryMenu.Count()+1);
+                        if (_directoryMenu[Console.CursorTop - 5] == "../")
                         {
                             try {
                                 Directory.SetCurrentDirectory(Directory.GetParent(Directory.GetCurrentDirectory()).FullName);
                             }catch (NullReferenceException e )
                             {
-                                clearDirectorySearch(_directoryMenu.Count());
+                                
                                 selectDrive();
                             }
-                            path = directorySearchThrough();
-                            }
+                            return directorySearchThrough();
+                        }
                         else if (dirs.Contains(_directoryMenu[Console.CursorTop - 5]))
                         {
                             Directory.SetCurrentDirectory(_directoryMenu[Console.CursorTop - 5]);
-                            path = directorySearchThrough();
+                           return directorySearchThrough();
                         }
                         else
                         {
-                            path = _directoryMenu[Console.CursorTop - 5];
-                            return path;
+                            return _directoryMenu[Console.CursorTop - 5];
+                            
                         }
                     break;
                 }
