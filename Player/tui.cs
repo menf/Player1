@@ -51,7 +51,7 @@ namespace Player
             this._musicPlayer = new Logic();
             this._drives = DriveInfo.GetDrives();
             this._directoryMenu = new Dictionary<int, string>();
-            loadPlaylist();
+            
         }
 
 
@@ -92,7 +92,7 @@ namespace Player
             Console.CursorVisible = true;
 
             selectDevice();
-
+            loadPlaylist();
             this.mainMenu(); 
         }
 
@@ -376,7 +376,6 @@ namespace Player
                 Console.WriteLine("Playlista jest pusta.");
             foreach (var item in playlist)
             {
-
                 Console.WriteLine(item.Key.ToString());
             }
         }
@@ -406,12 +405,15 @@ namespace Player
         {
             Dictionary<String, String> playlist = _musicPlayer.getPlaylist();
             string name, path;
-            name = playlist.First().Key;
-             path = playlist.First().Value;
-            playMusic(path);
-            _musicPlayer.Name = name;
-            playlist.Remove(name);
-            playlist.Add(name, path);
+            if (playlist.Count > 0)
+            {
+                name = playlist.First().Key;
+                path = playlist.First().Value;
+                playMusic(path);
+                _musicPlayer.Name = name;
+                playlist.Remove(name);
+                playlist.Add(name, path);
+            }
         }
 
         private void playlistMenu()
@@ -611,15 +613,17 @@ namespace Player
                 TimeSpan length = _musicPlayer.Length;
                 if (position > length)
                     length = position;
-                int x = Console.CursorTop;
+                int l = Console.CursorLeft;
+                int t = Console.CursorTop;
                 Console.SetCursorPosition(0, 2);
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.Write("TYTUL PIOSENKI "+_musicPlayer.Name);
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine(String.Format(@"<{0:mm\:ss}/{1:mm\:ss}>", _musicPlayer.Position, _musicPlayer.Length));
-                Console.CursorTop = x;
                 Console.ForegroundColor = ConsoleColor.White;
+                Console.CursorTop = t;
+                Console.CursorLeft = l;
 
             }
 
