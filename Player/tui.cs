@@ -17,6 +17,7 @@ namespace Player
 
     class tui 
     {
+      
         
         private const int MF_BYCOMMAND = 0x00000000;
         public const int SC_MAXIMIZE = 0xF030;
@@ -33,7 +34,6 @@ namespace Player
 
 
         private Dictionary<int, String> _menu;
-        private Dictionary<int, String> _playlistMenu;
         private Dictionary<ConsoleKey, String> _menuBar;
         private int _menuStartRow;
         private MMDevice _playerDevice;
@@ -41,6 +41,8 @@ namespace Player
         private DriveInfo[] _drives;
         private string _lastDir;
         private int vol;
+        private int shown;
+
         Dictionary<int, string> _directoryMenu;
 
         public tui()
@@ -264,6 +266,10 @@ namespace Player
                 Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
                 Console.WriteLine(Path.GetFileName(menu[Console.CursorTop - start]));
                 Console.SetCursorPosition(0, (Console.CursorTop - 2));
+            }
+            else if(shown > 5)
+            {
+                refreshDirs(0);
             }
         }
 
@@ -520,6 +526,7 @@ namespace Player
 
         private void selectDrive()
         {
+            shown = 0;
             Console.SetCursorPosition(0, 5);
 
             string[] drives = new String[_drives.Length];
@@ -562,6 +569,30 @@ namespace Player
             } while (key != ConsoleKey.X);
         }
 
+        private void refreshDirs(int x)
+        {
+            int top = Console.CursorTop;
+            Console.SetCursorPosition(0, 6);
+
+            if (_directoryMenu.Count - shown > 0)
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    try
+                    {
+                        Console.WriteLine(Path.GetFileName(_directoryMenu[shown + i]));
+                        shown++;
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
+                }
+            }
+            
+
+        }
+
         private String directorySearchThrough()
         {
 
@@ -592,19 +623,32 @@ namespace Player
                         Console.SetBufferSize(80, 35);
                         foreach (string f in files)
                         {
-                            Console.WriteLine(Path.GetFileName(f));
+                            //Console.WriteLine(Path.GetFileName(f));
                             _directoryMenu.Add(_directoryMenu.Count, f);
                         }
 
                         foreach (string d in dirs)
                         {
                         
-                            Console.WriteLine(Path.GetFileName(d));
+                            //Console.WriteLine(Path.GetFileName(d));
                             _directoryMenu.Add(_directoryMenu.Count, d);
                         }
                     }
-
-
+                //shown += shownDirs.Length;
+                //    if(_directoryMenu.Count - shown > 0)
+                //{
+                //    for (int i = 0;i < 5; i++)
+                //    {
+                //        try
+                //        {
+                //            shownDirs[i] = _directoryMenu[shown + i];
+                //        }catch(Exception e)
+                //        {
+                //            shownDirs[i] = null;
+                //        }
+                //    }
+                //}
+                    
 
                 } 
                 catch (Exception ex)
@@ -636,7 +680,6 @@ namespace Player
                                 Directory.SetCurrentDirectory(Directory.GetParent(Directory.GetCurrentDirectory()).FullName);
                             }catch (NullReferenceException e )
                             {
-                                
                                 selectDrive();
                             }
                             return directorySearchThrough();
