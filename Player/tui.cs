@@ -332,14 +332,14 @@ namespace Player
 
         private void addToPlaylist()
         {
-            string file = directorySearchThrough();
-            _musicPlayer.addToPlaylist(Path.GetFileNameWithoutExtension(file),file);
-           // String file = selectFile();
-          //  clearSelectFile();
-          //  if (File.Exists(file))
-          //  {
-          //      _musicPlayer.addToPlaylist(Path.GetFileNameWithoutExtension(file), file);
-          //  }
+           // string file = directorySearchThrough();
+        //    _musicPlayer.addToPlaylist(Path.GetFileNameWithoutExtension(file),file);
+            String file = selectFile();
+            clearSelectFile();
+            if (File.Exists(file))
+            {
+                _musicPlayer.addToPlaylist(Path.GetFileNameWithoutExtension(file), file);
+           }
 
         }
 
