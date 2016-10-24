@@ -51,6 +51,7 @@ namespace Player
             this._musicPlayer = new Logic();
             this._drives = DriveInfo.GetDrives();
             this._directoryMenu = new Dictionary<int, string>();
+            loadPlaylist();
         }
 
 
@@ -329,6 +330,22 @@ namespace Player
 
 
         #endregion
+
+        private void loadPlaylist()
+        {
+            //Console.Write(File.Exists("/playlist.cyk"));
+            //Console.ReadKey();
+            if (File.Exists(@"playlist.cyk"))
+            {
+                string[] plist = File.ReadAllLines(@"playlist.cyk");
+                if(plist.Length > 0)
+                {
+                    for (int i = 0; i < plist.Length; i++)
+                        _musicPlayer.addToPlaylist(Path.GetFileNameWithoutExtension(plist[i]),plist[i]);
+                }
+            }
+        }
+
 
         private void addToPlaylist()
         {
