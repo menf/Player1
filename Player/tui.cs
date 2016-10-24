@@ -243,6 +243,21 @@ namespace Player
             }
         }
 
+        private void upMenu(string[] menu, int start)
+        {
+            if (Console.CursorTop > start)
+            {
+                Console.SetCursorPosition(0, (Console.CursorTop - 1));
+                Console.BackgroundColor = ConsoleColor.Cyan;
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.WriteLine(menu[Console.CursorTop - start]);
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(menu[Console.CursorTop - start]);
+                Console.SetCursorPosition(0, (Console.CursorTop - 2));
+            }
+        }
+
         private void upFileMenu(Dictionary<int, String> menu, int start)
         {
             if (Console.CursorTop > start)
@@ -275,6 +290,23 @@ namespace Player
                 Console.SetCursorPosition(0, (Console.CursorTop - 1));
             }
         }
+
+        private void downMenu(string[] menu, int start)
+        {
+            if (Console.CursorTop < (start + menu.Length - 1))
+            {
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.White;
+
+                Console.WriteLine(menu[Console.CursorTop - start]);
+                Console.BackgroundColor = ConsoleColor.Cyan;
+                Console.ForegroundColor = ConsoleColor.Black;
+
+                Console.WriteLine(menu[Console.CursorTop - start]);
+                Console.SetCursorPosition(0, (Console.CursorTop - 1));
+            }
+        }
+
 
         private void downFileMenu(Dictionary<int, String> menu, int start)
         {
@@ -579,6 +611,60 @@ namespace Player
 
 
 
+        private void clearDirectorySearch(int i)
+        {
+            for (int x = 0; x < i; x++)
+            {
+                Console.CursorTop = 4 + x;
+                clearLine();
+            }
+        }
+
+
+        private void selectDrive()
+        {
+            Console.SetCursorPosition(0, 5);
+
+            string[] drives = new String[_drives.Length];
+            ConsoleKey key;
+            Console.WriteLine("Wybierz dysk:");
+            for(int i = 0; i< _drives.Length; i++)
+            {
+                drives[i] = _drives[i].Name;
+            }
+            Console.BackgroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine(drives[0]);
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+            for (int i = 1; i < drives.Length; i++)
+            {
+                Console.WriteLine(drives[i]);
+            }
+
+            Console.SetCursorPosition(0, 5);
+
+            do
+            {
+                key = Console.ReadKey(true).Key;
+                
+                switch (key)
+                {
+                    case ConsoleKey.UpArrow:
+                        upMenu(drives, 5);
+                    break;
+                    case ConsoleKey.DownArrow:
+                        downMenu(drives, 5);
+                    break;
+                    case ConsoleKey.Enter:
+                        Directory.SetCurrentDirectory(drives[Console.CursorTop - 5]);
+                        clearDirectorySearch(drives.Length);
+                    break;
+                }
+
+            } while (key != ConsoleKey.X);
+        }
+
         private String directorySearchThrough()
         {
 
@@ -589,41 +675,48 @@ namespace Player
             _directoryMenu[0] = "../";
             Console.WriteLine(_lastDir);
             Console.WriteLine(_directoryMenu[0]);
+
             string path = null;
             string[] files = null;
             string[] dirs = null;
-            try
-            {
-                files = Directory.GetFiles(_lastDir);
-                dirs = Directory.GetDirectories(_lastDir);
-                if (files.Length <= 0 && dirs.Length <= 0)
+            // string[] shownDirs = null;
+
+                try
                 {
-                    Console.WriteLine("Folder jest pusty."); 
-                }
-                else
-                {
-                    Console.SetBufferSize(90, 35);
-                    foreach (string f in files)
+
+                    files = Directory.GetFiles(_lastDir);
+                    dirs = Directory.GetDirectories(_lastDir);
+                    if (files.Length <= 0 && dirs.Length <= 0)
                     {
-                        Console.WriteLine(Path.GetFileName(f));
-                        _directoryMenu.Add(_directoryMenu.Count, f);
+                        Console.WriteLine("Folder jest pusty.");
+                    }
+                    else
+                    {
+                        Console.SetBufferSize(90, 35);
+                        foreach (string f in files)
+                        {
+                            Console.WriteLine(Path.GetFileName(f));
+                            _directoryMenu.Add(_directoryMenu.Count, f);
+                        }
+
+                        foreach (string d in dirs)
+                        {
+                            Console.WriteLine(Path.GetFileName(d));
+                            _directoryMenu.Add(_directoryMenu.Count, d);
+                        }
                     }
 
-                    foreach (string d in dirs)
-                    {
-                        Console.WriteLine(Path.GetFileName(d));
-                        //Console.WriteLine(dirs.Length);
-                        _directoryMenu.Add(_directoryMenu.Count, d);
-                    }
-                }
 
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            
 
             ConsoleKey key;
+
             Console.SetCursorPosition(0, 5);
             do
             {
@@ -644,7 +737,8 @@ namespace Player
                                 Directory.SetCurrentDirectory(Directory.GetParent(Directory.GetCurrentDirectory()).FullName);
                             }catch (NullReferenceException e )
                             {
-                                Console.Clear();
+                                clearDirectorySearch(_directoryMenu.Count());
+                                selectDrive();
                             }
                             path = directorySearchThrough();
                             }
