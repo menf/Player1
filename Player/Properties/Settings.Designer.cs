@@ -23,80 +23,74 @@ namespace Player.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int backgroud {
             get {
                 return ((int)(this["backgroud"]));
             }
-            set
-            {
+            set {
                 this["backgroud"] = value;
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("11")]
         public int barcolor {
             get {
                 return ((int)(this["barcolor"]));
             }
-            set
-            {
+            set {
                 this["barcolor"] = value;
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("15")]
         public int barfontcolor {
             get {
                 return ((int)(this["barfontcolor"]));
             }
-            set
-            {
+            set {
                 this["barfontcolor"] = value;
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("10")]
         public int timercolor {
             get {
                 return ((int)(this["timercolor"]));
             }
-            set
-            {
+            set {
                 this["timercolor"] = value;
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int menufontcolor {
             get {
                 return ((int)(this["menufontcolor"]));
             }
-            set
-            {
+            set {
                 this["menufontcolor"] = value;
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("11")]
         public int prompt {
             get {
                 return ((int)(this["prompt"]));
             }
-            set
-            {
+            set {
                 this["prompt"] = value;
             }
         }
@@ -110,6 +104,18 @@ namespace Player.Properties {
             }
             set {
                 this["foreground"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int promtfontcolor {
+            get {
+                return ((int)(this["promtfontcolor"]));
+            }
+            set {
+                this["promtfontcolor"] = value;
             }
         }
     }
