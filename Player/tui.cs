@@ -90,8 +90,7 @@ namespace Player
                 DeleteMenu(sysMenu, SC_SIZE, MF_BYCOMMAND);
             }
             Console.CursorVisible = true;
-            this.mainMenu();
-
+            this.mainMenu(); 
         }
 
         private void refreshMenuBar()
@@ -598,11 +597,6 @@ namespace Player
                     Console.WriteLine("Nie można odnaleźć pliku");
                     Console.ReadKey(true);
                 }
-            }
-            else
-            {
-               //odswiezanie widoku
-                selectDevice();
             }
             }
 
