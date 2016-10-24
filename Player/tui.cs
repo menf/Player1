@@ -116,7 +116,7 @@ namespace Player
 
             Console.SetCursorPosition(0, _menuStartRow);
             Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
-            Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
+            Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.promtfontcolor;
 
 
             foreach (var item in _menu)
@@ -229,8 +229,8 @@ namespace Player
             if (Console.CursorTop > start)
             {
                 Console.SetCursorPosition(0, (Console.CursorTop - 1));
-                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.barcolor;
-                Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
+                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
+                Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.promtfontcolor;
                 Console.WriteLine(menu[Console.CursorTop - start]);
                 Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
                 Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
@@ -244,10 +244,10 @@ namespace Player
             if (Console.CursorTop > start)
             {
                 Console.SetCursorPosition(0, (Console.CursorTop - 1));
-                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.barcolor;
-                Console.ForegroundColor = ConsoleColor.Black;
+                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
+                Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.promtfontcolor;
                 Console.WriteLine(menu[Console.CursorTop - start]);
-                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.barcolor;
+                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
                 Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
                 Console.WriteLine(menu[Console.CursorTop - start]);
                 Console.SetCursorPosition(0, (Console.CursorTop - 2));
@@ -259,8 +259,8 @@ namespace Player
             if (Console.CursorTop > start)
             {
                 Console.SetCursorPosition(0, (Console.CursorTop - 1));
-                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.barcolor;
-                Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
+                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
+                Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.promtfontcolor;
                 Console.WriteLine(Path.GetFileName(menu[Console.CursorTop - start]));
                 Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
                 Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
@@ -283,8 +283,8 @@ namespace Player
                 Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
 
                 Console.WriteLine(menu[Console.CursorTop - start]);
-                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.barcolor;
-                Console.ForegroundColor = ConsoleColor.Black;
+                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
+                Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.promtfontcolor;
 
                 Console.WriteLine(menu[Console.CursorTop - start]);
                 Console.SetCursorPosition(0, (Console.CursorTop - 1));
@@ -299,8 +299,8 @@ namespace Player
                 Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
 
                 Console.WriteLine(menu[Console.CursorTop - start]);
-                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.barcolor;
-                Console.ForegroundColor = ConsoleColor.Black;
+                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
+                Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.promtfontcolor;
 
                 Console.WriteLine(menu[Console.CursorTop - start]);
                 Console.SetCursorPosition(0, (Console.CursorTop - 1));
@@ -313,14 +313,18 @@ namespace Player
             if (Console.CursorTop < (start + menu.Count - 1))
             {
                 Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
-                Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
-
-                Console.WriteLine(Path.GetFileName(menu[Console.CursorTop - start]));
-                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.barcolor;
                 Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
 
                 Console.WriteLine(Path.GetFileName(menu[Console.CursorTop - start]));
+                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
+                Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.promtfontcolor;
+
+                Console.WriteLine(Path.GetFileName(menu[Console.CursorTop - start]));
                 Console.SetCursorPosition(0, (Console.CursorTop - 1));
+            }
+            else
+            {
+                refreshDirs(1);
             }
         }
 
@@ -413,13 +417,13 @@ namespace Player
 
             if (Console.CursorTop == _menuStartRow + 3)
             {
-                Console.BackgroundColor = ConsoleColor.Cyan;
-                Console.ForegroundColor = ConsoleColor.Black;
+                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
+                Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.promtfontcolor;
             }
             else
             {
-                Console.BackgroundColor = ConsoleColor.Black;
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
+                Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
             }
             int current = Console.CursorTop;
             vol = _musicPlayer.Volume + v;
@@ -430,7 +434,7 @@ namespace Player
             if (current == _menuStartRow + 3)
             {
                 Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
-                Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
+                Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.promtfontcolor;
             }
             Console.WriteLine(_menu[3]);
             Console.SetCursorPosition(0, current);
@@ -578,6 +582,22 @@ namespace Player
 
             if (_directoryMenu.Count - shown > 0)
             {
+                for (int i = 5; i > 0; i--)
+                {
+                    try
+                    {
+                        Console.WriteLine(Path.GetFileName(_directoryMenu[shown - i]));
+                        shown--;
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
+                }
+            }
+            else
+            {
+                Console.SetCursorPosition(0, 5);
                 for (int i = 0; i < 5; i++)
                 {
                     try
