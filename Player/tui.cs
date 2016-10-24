@@ -378,7 +378,7 @@ namespace Player
             }
         }
 
-        int x=Properties.Resources.;
+       
 
         private void refreshPlaylistMenu()
         {
