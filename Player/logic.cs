@@ -15,8 +15,8 @@ namespace Player
 
         private ISoundOut _soundout;
         private IWaveSource _wavesource;
-        private SortedDictionary<String,String> _playlist;
-
+        private Dictionary<String,String> _playlist;
+        private string name;
         private string[] availableExtensions = { ".mp3", ".flac", ".wav", ".wma", ".ogg", };
         
         public event EventHandler<PlaybackStoppedEventArgs> PlaybackStopped;
@@ -25,7 +25,7 @@ namespace Player
 
         public Logic()
         {
-            _playlist = new SortedDictionary<String,String>();
+            _playlist = new Dictionary<String,String>();
  
         }
 
@@ -49,7 +49,19 @@ namespace Player
             }
         }
 
-
+        public string Name
+        {
+            get
+            {
+                if (name != null)
+                    return name;
+                return "";
+            }
+            set
+            {
+                name = value;
+            }
+        }
 
         public TimeSpan Position
         {
@@ -143,7 +155,7 @@ namespace Player
 
 
 
-        public SortedDictionary<String,String> getPlaylist()
+        public Dictionary<String,String> getPlaylist()
         {
             return this._playlist;
         }

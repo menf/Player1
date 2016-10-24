@@ -72,6 +72,7 @@ namespace Player
             _playlistMenu.Add(0, "Dodaj do playlisty");
             _playlistMenu.Add(1, "Usuń z playlisty");
             _playlistMenu.Add(2, "Wybierz utwór");
+            _playlistMenu.Add(3, "Odtwórz playlistę");
         }
 
         public void loadInterface()
@@ -333,20 +334,17 @@ namespace Player
 
         private void loadPlaylist()
         {
-
-            string[] plist = Properties.Resources.playlist.Split('\n');
-            
-                if (plist.Length > 0)
+            //Console.Write(File.Exists("/playlist.cyk"));
+            //Console.ReadKey();
+            if (File.Exists(@"playlist.cyk"))
+            {
+                string[] plist = File.ReadAllLines(@"playlist.cyk");
+                if(plist.Length > 0)
                 {
                     for (int i = 0; i < plist.Length; i++)
-                {
-                    plist[i].Replace("\\", "\\\\");
-                    _musicPlayer.addToPlaylist(Path.GetFileNameWithoutExtension(plist[i]),plist[i]);
-
+                        _musicPlayer.addToPlaylist(Path.GetFileNameWithoutExtension(plist[i]),plist[i]);
                 }
-                       
-                }
-            
+            }
         }
 
 
@@ -371,8 +369,7 @@ namespace Player
         private void showPlaylist()
         {
             Console.SetCursorPosition(0, (_menuStartRow + _playlistMenu.Count + 1));
-            SortedDictionary<String, String> playlist = _musicPlayer.getPlaylist();
-            
+            Dictionary<String, String> playlist = _musicPlayer.getPlaylist();
             if (playlist == null)
                 Console.WriteLine("Playlista jest pusta.");
             foreach (var item in playlist)
@@ -401,6 +398,18 @@ namespace Player
             showPlaylist();
 
             Console.SetCursorPosition(0, _menuStartRow);
+        }
+
+        private void playlistPlay()
+        {
+            Dictionary<String, String> playlist = _musicPlayer.getPlaylist();
+            string name, path;
+            name = playlist.First().Key;
+             path = playlist.First().Value;
+            playMusic(path);
+            _musicPlayer.Name = name;
+            playlist.Remove(name);
+            playlist.Add(name, path);
         }
 
         private void playlistMenu()
@@ -449,7 +458,10 @@ namespace Player
                                 //wybierz utwor
                                 refreshPlaylistMenu();
                                 break;
-
+                            case 3:
+                                //gramy
+                                playlistPlay();
+                                break;
                         }
                         break;
 
@@ -564,17 +576,18 @@ namespace Player
 
         private void playMusic(String filePath)
         {
+
             if (_playerDevice != null)
             {
-                
+
                 try
                 {
                     _musicPlayer.Open(filePath, _playerDevice);
                     if (_musicPlayer.PlaybackState != PlaybackState.Playing)
                     {
-                        
+
                         timer = new Timer(Timer, null, 0, 1000);
-                        
+
                         _musicPlayer.Play();
 
                     }
@@ -586,7 +599,12 @@ namespace Player
                     Console.ReadKey(true);
                 }
             }
-        }
+            else
+            {
+               //odswiezanie widoku
+                selectDevice();
+            }
+            }
 
         private  void Timer(object state)
         {
@@ -600,7 +618,7 @@ namespace Player
                 Console.SetCursorPosition(0, 2);
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.BackgroundColor = ConsoleColor.Black;
-                Console.Write("TYTUL PIOSENKI ");
+                Console.Write("TYTUL PIOSENKI "+_musicPlayer.Name);
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine(String.Format(@"<{0:mm\:ss}/{1:mm\:ss}>", _musicPlayer.Position, _musicPlayer.Length));
                 Console.CursorTop = x;
