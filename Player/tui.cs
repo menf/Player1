@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 namespace Player
 {
@@ -301,19 +302,6 @@ namespace Player
             System.Console.SetCursorPosition(0, _menuStartRow - 3);
         }
 
-        private void settingsColors(int p)
-        {
-            System.Console.CursorLeft = 32;
-            if (Properties.Settings.Default.backgroud == 0)
-            {
-                Properties.Settings.Default.backgroud = 15;
-            }
-            else
-            {
-                Properties.Settings.Default.backgroud--;
-            }
-            System.Console.WriteLine();
-        }
 
         private void settingsMenu()
         {
@@ -797,7 +785,7 @@ namespace Player
             else
             {
                 System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
-                System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
+                System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.menufontcolor;
             }
             int current = System.Console.CursorTop;
             vol = _musicPlayer.Volume + v;
@@ -822,9 +810,6 @@ namespace Player
             {
                 if (File.Exists(filePath))
                 {
-
-
-
                     try
                     {
                         _musicPlayer.Open(filePath, _playerDevice);
@@ -845,6 +830,17 @@ namespace Player
                         System.Console.ReadKey(true);
                     }
                 }
+            }
+            else if(filePath == null)
+            {
+                return;
+            }
+            else
+            {
+                clearSelectFile();
+                System.Console.SetCursorPosition(0, 4);
+                System.Console.WriteLine("Nie można odnaleźć pliku");
+                System.Console.ReadKey(true);
             }
 
         }
@@ -888,6 +884,7 @@ namespace Player
 
             System.Console.SetCursorPosition(0, 4);
             System.Console.WriteLine("Podaj scieżkę do pliku:");
+
             return System.Console.ReadLine();
             
 
