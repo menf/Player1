@@ -39,10 +39,8 @@ namespace Player
         
         private MMDevice _playerDevice;
         private Logic _musicPlayer;
-        private DriveInfo[] _drives;
         private int vol;
         private Dictionary<int, String> _settingsMenu;
-        Dictionary<int, string> _directoryMenu;
 
         public tui()
         {
@@ -50,8 +48,6 @@ namespace Player
             this._menuBar = new Dictionary<ConsoleKey, string>();
             this._menuStartRow = 8;
             this._musicPlayer = new Logic();
-            this._drives = DriveInfo.GetDrives();
-            this._directoryMenu = new Dictionary<int, string>();
             this._settingsMenu = new Dictionary<int, string>();
             this.vol = 100;
             timer = new Timer(Timer, null, 0, 1000);
@@ -259,6 +255,7 @@ namespace Player
             {
 
                 Console.WriteLine(item.Value);
+
                 Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
                 Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
             }
@@ -295,14 +292,13 @@ namespace Player
                         refreshSettingsMenu();
                         break;
            
-                    case ConsoleKey.Enter:
+                    case ConsoleKey.LeftArrow:
                         switch (Console.CursorTop - _menuStartRow)
                         {
                             case 0:
                                
-                                break;
+                            break;
                             case 1:
-                              
 
                                 break;
                             case 2:
