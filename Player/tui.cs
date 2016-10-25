@@ -69,15 +69,15 @@ namespace Player
             _menuBar.Add(ConsoleKey.F1, "File (F1)");
             _menuBar.Add(ConsoleKey.F2, "Device (F2)");
             _menuBar.Add(ConsoleKey.F3, "Menu (F3)");
-            _menuBar.Add(ConsoleKey.F4, "Help (F4)");
+            _menuBar.Add(ConsoleKey.F4, "Settings (F4)");
 
         }
 
         public void loadInterface()
         {
             this.loadMenus();
-            Console.SetWindowSize(50, 14);
-            Console.SetBufferSize(50, 14);
+            Console.SetWindowSize(55, 14);
+            Console.SetBufferSize(55, 14);
             Console.Title = "Music Player";
             IntPtr handle = GetConsoleWindow();
             IntPtr sysMenu = GetSystemMenu(handle, false);
