@@ -87,9 +87,9 @@ namespace Player
         public void loadInterface()
         {
             this.loadMenus();
-            Console.SetWindowSize(54, 14);
-            Console.SetBufferSize(54, 14);
-            Console.Title = "Music Player";
+            System.Console.SetWindowSize(54, 14);
+            System.Console.SetBufferSize(54, 14);
+            System.Console.Title = "Music Player";
             IntPtr handle = GetConsoleWindow();
             IntPtr sysMenu = GetSystemMenu(handle, false);
 
@@ -98,7 +98,7 @@ namespace Player
                 DeleteMenu(sysMenu, SC_MAXIMIZE, MF_BYCOMMAND);
                 DeleteMenu(sysMenu, SC_SIZE, MF_BYCOMMAND);
             }
-            Console.CursorVisible = true;
+            System.Console.CursorVisible = true;
 
             selectDevice();
             this.mainMenu(); 
@@ -244,7 +244,7 @@ namespace Player
         {
             for (int x = 0; x < i; x++)
             {
-                Console.CursorTop = _menuStartRow - 3 + x;
+                System.Console.CursorTop = _menuStartRow - 3 + x;
                 clearLine();
             }
         }
@@ -252,16 +252,16 @@ namespace Player
 
         private void refreshSettingsMenu()
         {
-            if (Console.CursorTop > start)
+            if (System.Console.CursorTop > start)
             {
-                Console.SetCursorPosition(0, (Console.CursorTop - 1));
-                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
-                Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.promtfontcolor;
-                Console.WriteLine(menu[Console.CursorTop - start]);
-                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
-                Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
-                Console.WriteLine(menu[Console.CursorTop - start]);
-                Console.SetCursorPosition(0, (Console.CursorTop - 2));
+                System.Console.SetCursorPosition(0, (System.Console.CursorTop - 1));
+                System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
+                System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.promtfontcolor;
+                System.Console.WriteLine(menu[System.Console.CursorTop - start]);
+                System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
+                System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
+                System.Console.WriteLine(menu[System.Console.CursorTop - start]);
+                System.Console.SetCursorPosition(0, (System.Console.CursorTop - 2));
             }
         }
 
@@ -285,14 +285,14 @@ namespace Player
         {
             if (System.Console.CursorTop > start)
             {
-                Console.SetCursorPosition(0, (Console.CursorTop - 1));
-                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
-                Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.promtfontcolor;
-                Console.WriteLine(Path.GetFileName(menu[Console.CursorTop - start]));
-                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
-                Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
-                Console.WriteLine(Path.GetFileName(menu[Console.CursorTop - start]));
-                Console.SetCursorPosition(0, (Console.CursorTop - 2));
+                System.Console.SetCursorPosition(0, (System.Console.CursorTop - 1));
+                System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
+                System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.promtfontcolor;
+                System.Console.WriteLine(Path.GetFileName(menu[System.Console.CursorTop - start]));
+                System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
+                System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
+                System.Console.WriteLine(Path.GetFileName(menu[System.Console.CursorTop - start]));
+                System.Console.SetCursorPosition(0, (System.Console.CursorTop - 2));
             }
         }
 
@@ -334,17 +334,17 @@ namespace Player
 
         private void downFileMenu(Dictionary<int, String> menu, int start)
         {
-            if (Console.CursorTop < (start + menu.Count - 1))
+            if (System.Console.CursorTop < (start + menu.Count - 1))
             {
-                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
-                Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
+                System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
+                System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
 
-                Console.WriteLine(Path.GetFileName(menu[Console.CursorTop - start]));
-                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
-                Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.promtfontcolor;
+                System.Console.WriteLine(Path.GetFileName(menu[System.Console.CursorTop - start]));
+                System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
+                System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.promtfontcolor;
 
-                Console.WriteLine(Path.GetFileName(menu[Console.CursorTop - start]));
-                Console.SetCursorPosition(0, (Console.CursorTop - 1));
+                System.Console.WriteLine(Path.GetFileName(menu[System.Console.CursorTop - start]));
+                System.Console.SetCursorPosition(0, (System.Console.CursorTop - 1));
             }
             else
             {
@@ -489,13 +489,13 @@ namespace Player
                 }
                 catch (Exception e)
                 {
-                    Console.Clear();
-                    Console.WriteLine("Nie można odnaleźć pliku");
-                    Console.ReadKey(true);
+                        System.Console.Clear();
+                        System.Console.WriteLine("Nie można odnaleźć pliku");
+                        System.Console.ReadKey(true);
                 }
             }
             }
-
+            }
         private  void Timer(object state)
         {
             _musicPlayer.Volume = vol;
