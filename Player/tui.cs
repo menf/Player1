@@ -101,14 +101,11 @@ namespace Player
                 Colorful.Console.WriteAscii("PLAYER");
             Console.ResetColor();
             Console.WriteLine();
-            Console.Write("Aby rozpocząć wciśnij dowolny klawisz");
-            Console.ReadKey(true);
-                clearLine();
             Console.Write("Loading");
             for (int i = 0; i < 3; i++)
             {
-                Thread.Sleep(1000);
                 Console.Write(".");
+                Thread.Sleep(1000);
             }
             System.Console.Clear();
         }
