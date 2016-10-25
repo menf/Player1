@@ -519,28 +519,34 @@ namespace Player
 
             if (_playerDevice != null)
             {
-
-                try
+                if (File.Exists(filePath))
                 {
-                    _musicPlayer.Open(filePath, _playerDevice);
-                    if (_musicPlayer.PlaybackState != PlaybackState.Playing)
+
+
+
+                    try
                     {
+                        _musicPlayer.Open(filePath, _playerDevice);
+                        if (_musicPlayer.PlaybackState != PlaybackState.Playing)
+                        {
 
-                        
-                        _musicPlayer.Name = Path.GetFileNameWithoutExtension(filePath);
-                        _musicPlayer.Play();
 
+                            _musicPlayer.Name = Path.GetFileNameWithoutExtension(filePath);
+                            _musicPlayer.Play();
+
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        clearSelectFile();
+                        Console.SetCursorPosition(0, 4);
+                        Console.WriteLine("Nie można odnaleźć pliku");
+                        Console.ReadKey(true);
                     }
                 }
-                catch (Exception e)
-                {
-                    clearSelectFile();
-                    Console.SetCursorPosition(0, 4);
-                    Console.WriteLine("Nie można odnaleźć pliku");
-                    Console.ReadKey(true);
-                }
             }
-            }
+
+        }
 
         private  void Timer(object state)
         {
