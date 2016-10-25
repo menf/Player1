@@ -42,7 +42,7 @@ namespace Player
         private string _lastDir;
         private int vol;
         private int shown;
-
+        private Dictionary<int, String> _settingsMenu;
         Dictionary<int, string> _directoryMenu;
 
         public tui()
@@ -53,7 +53,8 @@ namespace Player
             this._musicPlayer = new Logic();
             this._drives = DriveInfo.GetDrives();
             this._directoryMenu = new Dictionary<int, string>();
-            vol = 100;
+            this._settingsMenu = new Dictionary<int, string>();
+            this.vol = 100;
         }
 
 
@@ -70,14 +71,14 @@ namespace Player
             _menuBar.Add(ConsoleKey.F2, "Device (F2)");
             _menuBar.Add(ConsoleKey.F3, "Menu (F3)");
             _menuBar.Add(ConsoleKey.F4, "Settings (F4)");
-
+           // _settingsMenu.Add()
         }
 
         public void loadInterface()
         {
             this.loadMenus();
-            Console.SetWindowSize(55, 14);
-            Console.SetBufferSize(55, 14);
+            Console.SetWindowSize(54, 14);
+            Console.SetBufferSize(54, 14);
             Console.Title = "Music Player";
             IntPtr handle = GetConsoleWindow();
             IntPtr sysMenu = GetSystemMenu(handle, false);
@@ -99,13 +100,15 @@ namespace Player
             Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.barcolor;
             Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.barfontcolor;
             foreach (var item in _menuBar)
-            { 
-                Console.Write(item.Value + "    ");
+            {
+                if (item.Key == ConsoleKey.F4)
+                    Console.Write(item.Value);
+                else
+                    Console.Write(item.Value + "    ");
             }
             Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
             Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
-            Console.CursorLeft = Console.CursorLeft - 4;
-            Console.Write("    ");
+
         }
 
         private void refreshMenu()
