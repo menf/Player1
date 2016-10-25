@@ -59,33 +59,5 @@ namespace Player.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to C:\Users\Public\Music\Sample Music\Kalimba.mp3
-        ///C:\Users\Public\Music\Sample Music\Sleep Away.mp3.
-        /// </summary>
-        internal static string playlist {
-            get {
-                return ResourceManager.GetString("playlist", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Skróty klawiszowe:
-        ///+ volume up
-        ///- volume down
-        ///F1 File explorer
-        ///F2 Device Manager
-        ///F3 Menu
-        ///
-        ///UWAGA:
-        ///Przed wybraniem plików do odsłuchu należy wybrac aktywne urzšdzenie do odsłuchu!
-        ///.
-        /// </summary>
-        internal static string readme {
-            get {
-                return ResourceManager.GetString("readme", resourceCulture);
-            }
-        }
     }
 }
