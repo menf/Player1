@@ -107,6 +107,8 @@ namespace Player
         }
         private void refreshMenuBar()
         {
+            int l = System.Console.CursorLeft;
+            int t = System.Console.CursorTop;
             System.Console.SetCursorPosition(0, 0);
             System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.barcolor;
             System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.barfontcolor;
@@ -119,7 +121,7 @@ namespace Player
             }
             System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
             System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
-
+            System.Console.SetCursorPosition(l, t);
         }
 
         private void refreshMenu()
@@ -442,7 +444,9 @@ namespace Player
                                     Properties.Settings.Default.barcolor--;
                                     System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.barcolor;
                                 }
+                                
                                 System.Console.Write("    ");
+                                refreshMenuBar();
                                 break;
                             case 6:
                                 System.Console.SetCursorPosition(32, System.Console.CursorTop);
@@ -458,7 +462,9 @@ namespace Player
                                     Properties.Settings.Default.barfontcolor--;
                                     System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.barfontcolor;
                                 }
+                                
                                 System.Console.Write("    ");
+                                refreshMenuBar();
                                 break;
                             case 7:
                                 System.Console.SetCursorPosition(32, System.Console.CursorTop);
@@ -475,6 +481,7 @@ namespace Player
                                     System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.menufontcolor;
                                 }
                                 System.Console.Write("    ");
+                                
                                 break;
                         }
                         System.Console.SetCursorPosition(0, System.Console.CursorTop);
@@ -576,7 +583,9 @@ namespace Player
                                     Properties.Settings.Default.barcolor++;
                                     System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.barcolor;
                                 }
+                               
                                 System.Console.Write("    ");
+                                refreshMenuBar();
                                 break;
                             case 6:
                                 System.Console.CursorLeft = 32;
@@ -591,8 +600,11 @@ namespace Player
                                     
                                     Properties.Settings.Default.barfontcolor++;
                                     System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.barfontcolor;
+                                    
                                 }
+                               
                                 System.Console.Write("    ");
+                                refreshMenuBar();
                                 break;
                             case 7:
                                 System.Console.CursorLeft = 32;
