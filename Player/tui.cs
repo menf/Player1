@@ -69,7 +69,7 @@ namespace Player
             _menuBar.Add(ConsoleKey.F1, "File (F1)");
             _menuBar.Add(ConsoleKey.F2, "Device (F2)");
             _menuBar.Add(ConsoleKey.F3, "Menu (F3)");
-            _menuBar.Add(ConsoleKey.F4, "Help (F4)");
+            _menuBar.Add(ConsoleKey.F4, "Settings (F4)");
 
         }
 
@@ -334,7 +334,7 @@ namespace Player
 
         #endregion
 
-  
+     
 
 
 
