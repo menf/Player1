@@ -89,11 +89,15 @@ namespace Player
                 DeleteMenu(sysMenu, SC_SIZE, MF_BYCOMMAND);
             }
             System.Console.CursorVisible = false;
-     
+            greet();
             selectDevice();
             this.mainMenu(); 
         }
-        
+     private void   greet()
+        {
+
+
+        }
         private void refreshMenuBar()
         {
             System.Console.SetCursorPosition(0, 0);
