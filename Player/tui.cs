@@ -186,6 +186,7 @@ namespace Player
                         selectDevice();
                         refreshMenu();
                     break;
+                    
                     case ConsoleKey.F4:
                         clearMenu(_menu.Count);
                         settingsMenu();
@@ -291,7 +292,10 @@ namespace Player
                         selectDevice();
                         refreshSettingsMenu();
                         break;
-           
+                    case ConsoleKey.F3:
+                        clearSettingsMenu(_settingsMenu.Count);
+                        return;
+                        break;
                     case ConsoleKey.LeftArrow:
                         switch (Console.CursorTop - _menuStartRow)
                         {
@@ -410,7 +414,7 @@ namespace Player
         private ConsoleKey selectDevice()
         {
 
-            Console.SetCursorPosition(0, _menuStartRow);
+            Console.SetCursorPosition(0, _menuStartRow - 3);
             ObservableCollection<MMDevice> _devices = new ObservableCollection<MMDevice>();
             int nbr = 0;
             using (var mmdeviceEnumerator = new MMDeviceEnumerator())
