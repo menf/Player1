@@ -56,6 +56,7 @@ namespace Player
             this._directoryMenu = new Dictionary<int, string>();
             this._settingsMenu = new Dictionary<int, string>();
             this.vol = 100;
+            timer = new Timer(Timer, null, 0, 1000);
         }
 
 
@@ -563,8 +564,8 @@ namespace Player
                     if (_musicPlayer.PlaybackState != PlaybackState.Playing)
                     {
 
-                        timer = new Timer(Timer, null, 0, 1000);
-
+                        
+                        _musicPlayer.Name = Path.GetFileNameWithoutExtension(filePath);
                         _musicPlayer.Play();
 
                     }
@@ -594,7 +595,7 @@ namespace Player
                 Console.SetCursorPosition(0, 2);
                 Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
                 Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
-                Console.Write("TYTUL PIOSENKI "+_musicPlayer.Name);
+                Console.Write(_musicPlayer.Name+"   ");
                 Console.ForegroundColor =(ConsoleColor) Properties.Settings.Default.timercolor;
                 Console.WriteLine(String.Format(@"<{0:mm\:ss}/{1:mm\:ss}>", _musicPlayer.Position, _musicPlayer.Length));
                 Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
