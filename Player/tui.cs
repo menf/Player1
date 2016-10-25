@@ -93,18 +93,26 @@ namespace Player
             selectDevice();
             this.mainMenu(); 
         }
+
      private void   greet()
         {
             Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.barcolor;
                 Colorful.Console.WriteAscii("MUSIC");
                 Colorful.Console.WriteAscii("PLAYER");
             Console.ResetColor();
-            Colorful.Console.WriteLine("Aby rozpocząć wciśnij dowolny klawisz");
-               System.Console.ReadKey(true);
-            Thread.Sleep(100);
+            Console.WriteLine();
+            Console.Write("Aby rozpocząć wciśnij dowolny klawisz");
+            Console.ReadKey(true);
+                clearLine();
+            Console.Write("Loading");
+            for (int i = 0; i < 3; i++)
+            {
+                Thread.Sleep(1000);
+                Console.Write(".");
+            }
             System.Console.Clear();
-
         }
+
         private void refreshMenuBar()
         {
             int l = System.Console.CursorLeft;
