@@ -1,16 +1,13 @@
-﻿using System;
-using System.ComponentModel;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CSCore;
+﻿using CSCore;
 using CSCore.Codecs;
 using CSCore.CoreAudioAPI;
 using CSCore.SoundOut;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 namespace Player
 {
-   public class Logic : Component
+    public class Logic : Component
     {
 
         private ISoundOut _soundout;
