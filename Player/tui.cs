@@ -1,4 +1,4 @@
-﻿using Colorful;
+﻿
 using CSCore.CoreAudioAPI;
 using CSCore.SoundOut;
 using System;
@@ -49,7 +49,7 @@ namespace Player
             timer = new Timer(Timer, null, 0, 1000);
         }
 
-
+        
 
 #region Menu
 
@@ -89,11 +89,22 @@ namespace Player
                 DeleteMenu(sysMenu, SC_SIZE, MF_BYCOMMAND);
             }
             System.Console.CursorVisible = false;
-     
+            greet();
             selectDevice();
             this.mainMenu(); 
         }
-        
+     private void   greet()
+        {
+            Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.barcolor;
+                Colorful.Console.WriteAscii("MUSIC");
+                Colorful.Console.WriteAscii("PLAYER");
+            Console.ResetColor();
+            Colorful.Console.WriteLine("Aby rozpocząć wciśnij dowolny klawisz");
+               System.Console.ReadKey(true);
+            Thread.Sleep(100);
+            System.Console.Clear();
+
+        }
         private void refreshMenuBar()
         {
             System.Console.SetCursorPosition(0, 0);
