@@ -478,7 +478,7 @@ namespace Player
                                 break;
                         }
                         System.Console.SetCursorPosition(0, System.Console.CursorTop);
-                      
+                        Properties.Settings.Default.Save();
                         break;
                     case ConsoleKey.RightArrow:
                         switch (System.Console.CursorTop - _menuStartRow + 3)
@@ -612,8 +612,8 @@ namespace Player
                                 break;
                         }
                         System.Console.SetCursorPosition(0, System.Console.CursorTop);
-                        
 
+                        Properties.Settings.Default.Save();
                         break;
 
 
