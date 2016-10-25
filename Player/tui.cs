@@ -127,7 +127,7 @@ namespace Player
 
                 System.Console.WriteLine(item.Value);
                 System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
-                System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
+                System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.menufontcolor;
             }
             System.Console.SetCursorPosition(0, _menuStartRow);
         }
@@ -250,13 +250,56 @@ namespace Player
             foreach (var item in _settingsMenu)
             {
 
-                System.Console.WriteLine(item.Value);
-
+                System.Console.Write(item.Value);
+                System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
+                System.Console.CursorLeft = 32;
+                switch (item.Key)
+                {
+                    case 0:
+                        System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
+                    break;
+                    case 1:
+                        System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
+                    break;
+                    case 2:
+                        System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
+                    break;
+                    case 3:
+                        System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.promtfontcolor;
+                    break;
+                    case 4:
+                        System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.timercolor;
+                    break;
+                    case 5:
+                        System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.barcolor;
+                    break;
+                    case 6:
+                        System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.barfontcolor;
+                    break;
+                    case 7:
+                        System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.menufontcolor;
+                    break;
+                }
+                System.Console.WriteLine("    ");
                 System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
                 System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
             }
 
             System.Console.SetCursorPosition(0, _menuStartRow - 3);
+        }
+
+        private void settingsColors(int p)
+        {
+            System.Console.CursorLeft = 32;
+            if (Properties.Settings.Default.backgroud == 0)
+            {
+                Properties.Settings.Default.backgroud = 15;
+            }
+            else
+            {
+                Properties.Settings.Default.backgroud--;
+            }
+            System.Console.WriteLine();
         }
 
         private void settingsMenu()
@@ -287,35 +330,279 @@ namespace Player
                         selectDevice();
                         refreshSettingsMenu();
                         break;
-           
+                    case ConsoleKey.F3:
+                        clearSettingsMenu(_settingsMenu.Count);
+                        return;
                     case ConsoleKey.LeftArrow:
-                        switch (System.Console.CursorTop - _menuStartRow)
+                        switch (System.Console.CursorTop - _menuStartRow + 3)
                         {
                             case 0:
-                               
-                            break;
-                            case 1:
+                                System.Console.SetCursorPosition(32, System.Console.CursorTop);
+                                
+                                if(Properties.Settings.Default.backgroud == 0)
+                                {
+                                    System.Console.BackgroundColor = (ConsoleColor)15;
+                                    Properties.Settings.Default.backgroud = 15;
+                                }
+                                else
+                                {
 
+                                    Properties.Settings.Default.backgroud--;
+
+                                    System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
+                                }
+                                System.Console.Write("    ");
+                                break;
+                            case 1:
+                                System.Console.SetCursorPosition(32, System.Console.CursorTop);
+                                if (Properties.Settings.Default.foreground == 0)
+                                {
+                                    System.Console.BackgroundColor = (ConsoleColor)15;
+
+                                    Properties.Settings.Default.foreground = 15;
+                                }
+                                else
+                                {
+
+                                    Properties.Settings.Default.foreground--;
+                                    System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
+                                }
+                                System.Console.Write("    ");
                                 break;
                             case 2:
-                               
+                                System.Console.SetCursorPosition(32, System.Console.CursorTop);
+                                if (Properties.Settings.Default.prompt == 0)
+                                {
+                                    System.Console.BackgroundColor = (ConsoleColor)15;
+
+                                    Properties.Settings.Default.prompt = 15;
+                                }
+                                else
+                                {
+
+                                    Properties.Settings.Default.prompt--;
+                                    System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
+                                }
+                                System.Console.Write("    ");
                                 break;
                             case 3:
+                                System.Console.SetCursorPosition(32, System.Console.CursorTop);
+                                if (Properties.Settings.Default.promtfontcolor == 0)
+                                {
+                                    System.Console.BackgroundColor = (ConsoleColor)15;
 
+                                    Properties.Settings.Default.promtfontcolor = 15;
+                                }
+                                else
+                                {
+
+                                    Properties.Settings.Default.promtfontcolor--;
+                                    System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.promtfontcolor;
+                                }
+                                System.Console.Write("    ");
                                 break;
                             case 4:
+                                System.Console.SetCursorPosition(32, System.Console.CursorTop);
+                                if (Properties.Settings.Default.timercolor == 0)
+                                {
+                                    System.Console.BackgroundColor = (ConsoleColor)15;
 
+                                    Properties.Settings.Default.timercolor = 15;
+                                }
+                                else
+                                {
+
+                                    Properties.Settings.Default.timercolor--;
+                                    System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.timercolor;
+                                }
+                                System.Console.Write("    ");
                                 break;
                             case 5:
+                                System.Console.SetCursorPosition(32, System.Console.CursorTop);
+                                if (Properties.Settings.Default.barcolor == 0)
+                                {
+                                    System.Console.BackgroundColor = (ConsoleColor)15;
 
+                                    Properties.Settings.Default.barcolor = 15;
+                                }
+                                else
+                                {
+
+                                    Properties.Settings.Default.barcolor--;
+                                    System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.barcolor;
+                                }
+                                System.Console.Write("    ");
                                 break;
                             case 6:
+                                System.Console.SetCursorPosition(32, System.Console.CursorTop);
+                                if (Properties.Settings.Default.barfontcolor == 0)
+                                {
+                                    System.Console.BackgroundColor = (ConsoleColor)15;
 
+                                    Properties.Settings.Default.barfontcolor = 15;
+                                }
+                                else
+                                {
+
+                                    Properties.Settings.Default.barfontcolor--;
+                                    System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.barfontcolor;
+                                }
+                                System.Console.Write("    ");
                                 break;
                             case 7:
+                                System.Console.SetCursorPosition(32, System.Console.CursorTop);
+                                if (Properties.Settings.Default.menufontcolor == 0)
+                                {
+                                    System.Console.BackgroundColor = (ConsoleColor)15;
 
+                                    Properties.Settings.Default.menufontcolor = 15;
+                                }
+                                else
+                                {
+
+                                    Properties.Settings.Default.menufontcolor--;
+                                    System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.menufontcolor;
+                                }
+                                System.Console.Write("    ");
                                 break;
                         }
+                        System.Console.SetCursorPosition(0, System.Console.CursorTop);
+                      
+                        break;
+                    case ConsoleKey.RightArrow:
+                        switch (System.Console.CursorTop - _menuStartRow + 3)
+                        {
+                            case 0:
+                                System.Console.CursorLeft = 32;
+                                if (Properties.Settings.Default.backgroud == 15)
+                                {
+                                    System.Console.BackgroundColor = (ConsoleColor)0;
+
+                                    Properties.Settings.Default.backgroud = 0;
+                                }
+                                else
+                                {
+
+                                    Properties.Settings.Default.backgroud++;
+                                    System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
+                                }
+                                System.Console.Write("    ");
+                                break;
+                            case 1:
+                                System.Console.CursorLeft = 32;
+                                if (Properties.Settings.Default.foreground == 15)
+                                {
+                                    System.Console.BackgroundColor = (ConsoleColor)0;
+
+                                    Properties.Settings.Default.foreground = 0;
+                                }
+                                else
+                                {
+
+                                    Properties.Settings.Default.foreground++;
+                                    System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
+                                }
+                                System.Console.Write("    ");
+                                break;
+                            case 2:
+                                System.Console.CursorLeft = 32;
+                                if (Properties.Settings.Default.prompt == 15)
+                                {
+                                    System.Console.BackgroundColor = (ConsoleColor)0;
+
+                                    Properties.Settings.Default.prompt = 0;
+                                }
+                                else
+                                {
+
+                                    Properties.Settings.Default.prompt++;
+                                    System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
+                                }
+                                System.Console.Write("    ");
+                                break;
+                            case 3:
+                                System.Console.CursorLeft = 32;
+                                if (Properties.Settings.Default.promtfontcolor == 15)
+                                {
+                                    System.Console.BackgroundColor = (ConsoleColor)0;
+
+                                    Properties.Settings.Default.promtfontcolor = 0;
+                                }
+                                else
+                                {
+
+                                    Properties.Settings.Default.promtfontcolor++;
+                                    System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.promtfontcolor;
+                                }
+                                System.Console.Write("    ");
+                                break;
+                            case 4:
+                                System.Console.CursorLeft = 32;
+                                if (Properties.Settings.Default.timercolor == 15)
+                                {
+                                    System.Console.BackgroundColor = (ConsoleColor)0;
+
+                                    Properties.Settings.Default.timercolor = 0;
+                                }
+                                else
+                                {
+
+                                    Properties.Settings.Default.timercolor++;
+                                    System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.timercolor;
+                                }
+                                System.Console.Write("    ");
+                                break;
+                            case 5:
+                                System.Console.CursorLeft = 32;
+                                if (Properties.Settings.Default.barcolor == 15)
+                                {
+                                    System.Console.BackgroundColor = (ConsoleColor)0;
+
+                                    Properties.Settings.Default.barcolor = 0;
+                                }
+                                else
+                                {
+                                    Properties.Settings.Default.barcolor++;
+                                    System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.barcolor;
+                                }
+                                System.Console.Write("    ");
+                                break;
+                            case 6:
+                                System.Console.CursorLeft = 32;
+                                if (Properties.Settings.Default.barfontcolor == 15)
+                                {
+                                    System.Console.BackgroundColor = (ConsoleColor)0;
+
+                                    Properties.Settings.Default.barfontcolor = 0;
+                                }
+                                else
+                                {
+                                    
+                                    Properties.Settings.Default.barfontcolor++;
+                                    System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.barfontcolor;
+                                }
+                                System.Console.Write("    ");
+                                break;
+                            case 7:
+                                System.Console.CursorLeft = 32;
+                                if (Properties.Settings.Default.menufontcolor == 15)
+                                {
+                                    System.Console.BackgroundColor = (ConsoleColor)0;
+
+                                    Properties.Settings.Default.menufontcolor = 0;
+                                }
+                                else
+                                {
+                                    
+                                    Properties.Settings.Default.menufontcolor++;
+                                    System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.menufontcolor;
+                                }
+                                System.Console.Write("    ");
+                                break;
+                        }
+                        System.Console.SetCursorPosition(0, System.Console.CursorTop);
+                        
+
                         break;
 
 
@@ -333,28 +620,22 @@ namespace Player
                 System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
                 System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.promtfontcolor;
                 System.Console.WriteLine(menu[System.Console.CursorTop - start]);
-                System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
-                System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
+                if(menu.Count == _menu.Count)
+                {
+                    System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
+                    System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.menufontcolor;
+                }
+                else
+                {
+                    System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
+                    System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
+                }
+             
                 System.Console.WriteLine(menu[System.Console.CursorTop - start]);
                 System.Console.SetCursorPosition(0, (System.Console.CursorTop - 2));
             }
-        }
 
-        private void upMenu(string[] menu, int start)
-        {
-            if (System.Console.CursorTop > start)
-            {
-                System.Console.SetCursorPosition(0, (System.Console.CursorTop - 1));
-                System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
-                System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.promtfontcolor;
-                System.Console.WriteLine(menu[System.Console.CursorTop - start]);
-                System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
-                System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
-                System.Console.WriteLine(menu[System.Console.CursorTop - start]);
-                System.Console.SetCursorPosition(0, (System.Console.CursorTop - 2));
-            }
         }
-
 
 
 
@@ -362,10 +643,20 @@ namespace Player
         {
             if (System.Console.CursorTop < (start + menu.Count - 1))
             {
-                System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
-                System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
+                if (menu.Count == _menu.Count)
+                {
+                    System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
+                    System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.menufontcolor;
+                }
+                else
+                {
+                    System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
+                    System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
+                }
+
 
                 System.Console.WriteLine(menu[System.Console.CursorTop - start]);
+  
                 System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
                 System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.promtfontcolor;
 
@@ -373,25 +664,6 @@ namespace Player
                 System.Console.SetCursorPosition(0, (System.Console.CursorTop - 1));
             }
         }
-
-        private void downMenu(string[] menu, int start)
-        {
-            if (System.Console.CursorTop < (start + menu.Length - 1))
-            {
-                System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
-                System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
-
-                System.Console.WriteLine(menu[System.Console.CursorTop - start]);
-                System.Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
-                System.Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.promtfontcolor;
-
-                System.Console.WriteLine(menu[System.Console.CursorTop - start]);
-                System.Console.SetCursorPosition(0, (System.Console.CursorTop - 1));
-            }
-        }
-
-
-
 
 
 
@@ -402,11 +674,19 @@ namespace Player
      
 
 
+        private void clearSelectDevice(int i )
+        {
+            for (int x = 0; x < i; x++)
+            {
+                System.Console.CursorTop = _menuStartRow - 3 + x;
+                clearLine();
+            }
+        }
 
         private ConsoleKey selectDevice()
         {
 
-            System.Console.SetCursorPosition(0, _menuStartRow);
+            System.Console.SetCursorPosition(0, _menuStartRow - 3);
             ObservableCollection<MMDevice> _devices = new ObservableCollection<MMDevice>();
             int nbr = 0;
             using (var mmdeviceEnumerator = new MMDeviceEnumerator())
@@ -438,19 +718,25 @@ namespace Player
                 System.Console.WriteLine("Wybierz nr urządzenia: ");
                 System.ConsoleKeyInfo key;
                 int option = -1;
-                nbr = System.Console.CursorTop - _menuStartRow;
+                nbr = System.Console.CursorTop - _menuStartRow + 3;
 
                 do
                 {
                     key = System.Console.ReadKey(true);
                     if (key.Key == ConsoleKey.F3)
                     {
-                        clearMenu(nbr);
+                        clearSelectDevice(nbr);
                         return key.Key;
                     }
-                    if(key.Key == ConsoleKey.F1 && _playerDevice != null)
+                    if (key.Key == ConsoleKey.F4)
                     {
-                        clearMenu(nbr);
+                        clearSelectDevice(nbr);
+                        settingsMenu();
+                        return key.Key;
+                    }
+                    if (key.Key == ConsoleKey.F1 && _playerDevice != null)
+                    {
+                        clearSelectDevice(nbr);
                         this.selectFile();
                         clearSelectFile();
                         return ConsoleKey.F3;
@@ -463,7 +749,7 @@ namespace Player
                     if (option >= 0 && option < _devices.Count)
                     {
                         _playerDevice = _devices[option];
-                        clearMenu(nbr);
+                        clearSelectDevice(nbr);
                         return ConsoleKey.F3;
                     }
                         
@@ -471,7 +757,7 @@ namespace Player
 
                 } while (key.Key != ConsoleKey.X);
             }
-            clearMenu(nbr);
+            clearSelectDevice(nbr);
             return ConsoleKey.X;
         }
 

@@ -15,7 +15,7 @@
       <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="menufontcolor" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">15</Value>
     </Setting>
     <Setting Name="prompt" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">11</Value>

@@ -73,7 +73,7 @@ namespace Player.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
         public int menufontcolor {
             get {
                 return ((int)(this["menufontcolor"]));
