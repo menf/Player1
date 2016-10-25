@@ -40,9 +40,7 @@ namespace Player
         private MMDevice _playerDevice;
         private Logic _musicPlayer;
         private DriveInfo[] _drives;
-        private string _lastDir;
         private int vol;
-        private int shown;
         private Dictionary<int, String> _settingsMenu;
         Dictionary<int, string> _directoryMenu;
 
@@ -365,24 +363,6 @@ namespace Player
             }
         }
 
-        private void upFileMenu(Dictionary<int, String> menu, int start)
-        {
-            if (Console.CursorTop > start)
-            {
-                Console.SetCursorPosition(0, (Console.CursorTop - 1));
-                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
-                Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.promtfontcolor;
-                Console.WriteLine(Path.GetFileName(menu[Console.CursorTop - start]));
-                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
-                Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
-                Console.WriteLine(Path.GetFileName(menu[Console.CursorTop - start]));
-                Console.SetCursorPosition(0, (Console.CursorTop - 2));
-            }
-            else if(shown > 5)
-            {
-                refreshDirs(0);
-            }
-        }
 
 
 
@@ -419,25 +399,7 @@ namespace Player
         }
 
 
-        private void downFileMenu(Dictionary<int, String> menu, int start)
-        {
-            if (Console.CursorTop < (start + menu.Count - 1))
-            {
-                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.backgroud;
-                Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.foreground;
 
-                Console.WriteLine(Path.GetFileName(menu[Console.CursorTop - start]));
-                Console.BackgroundColor = (ConsoleColor)Properties.Settings.Default.prompt;
-                Console.ForegroundColor = (ConsoleColor)Properties.Settings.Default.promtfontcolor;
-
-                Console.WriteLine(Path.GetFileName(menu[Console.CursorTop - start]));
-                Console.SetCursorPosition(0, (Console.CursorTop - 1));
-            }
-            else
-            {
-                refreshDirs(1);
-            }
-        }
 
 
 
