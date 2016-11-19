@@ -40,6 +40,9 @@ namespace Player
 
         public tui()
         {
+
+            Program.AllocConsole();
+
             this._menu = new Dictionary<int, string>();
             this._menuBar = new Dictionary<ConsoleKey, string>();
             this._menuStartRow = 8;
