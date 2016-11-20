@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Windows;
-
+using System.Windows.Forms;
 namespace Player
 {
     class Program
@@ -9,14 +9,17 @@ namespace Player
 
         #region Do WPF'a
 
-        public static Application WinApp { get; private set; }
+        public static System.Windows.Forms.Application WinApp { get; private set; }
         public static Window MainWindow { get; private set; }
 
 
         internal static void InitializeWindows()
         {
-            WinApp = new Application();
-            WinApp.Run(MainWindow = new MainWindow()); // note: blocking call
+            //  WinApp = new Application();
+            //  WinApp.Run( = new MainWindow()); // note: blocking call
+            System.Windows.Forms.Application.EnableVisualStyles();
+            System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+            System.Windows.Forms.Application.Run(new PlayerWindow());
         }
 
         #endregion

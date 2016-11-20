@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Player"
         mc:Ignorable="d" 
         Title="Wyczepisty Music Player"
-        d:DesignHeight="300" d:DesignWidth="300">
+        d:DesignHeight="300" Width="505.22">
     <Grid Name="MainGrid" Background="White">
         <Menu Name="Main_Menu"  VerticalAlignment="Top" HorizontalAlignment="Left"  Width="{Binding ElementName=MainGrid,Path=ActualWidth}">
             <MenuItem Header="_Plik" VerticalAlignment="Center" >
@@ -15,5 +15,13 @@
                 <MenuItem Header="_Wyjście" Click="Exit_Click" />
             </MenuItem>
         </Menu>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="17,47,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="button_Copy" Content="Button" HorizontalAlignment="Left" Margin="17,74,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="button_Copy1" Content="Button" HorizontalAlignment="Left" Margin="17,101,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="button_Copy2" Content="Button" HorizontalAlignment="Left" Margin="17,128,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="41,165,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy" Content="Label" HorizontalAlignment="Left" Margin="41,203,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="151,34,0,0" VerticalAlignment="Top" Width="120"/>
+        
     </Grid>
 </Window>
