@@ -161,6 +161,7 @@
             this.trackbarVolume.Size = new System.Drawing.Size(220, 45);
             this.trackbarVolume.TabIndex = 8;
             this.trackbarVolume.TickFrequency = 10;
+            
             this.trackbarVolume.ValueChanged += new System.EventHandler(this.trackbarVolume_ValueChanged);
             // 
             // label2
