@@ -62,7 +62,7 @@
             this.btnPlay.Size = new System.Drawing.Size(Properties.Resources.PlayButton.Width, Properties.Resources.PlayButton.Width);
             this.btnPlay.TabIndex = 1;
             this.btnPlay.Image = Properties.Resources.PlayButton;
-            this.btnPlay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnPlay.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
 
             this.btnPlay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPlay.FlatAppearance.BorderSize = 0;
@@ -80,7 +80,7 @@
             this.btnPause.Size = new System.Drawing.Size(Properties.Resources.PauseButton.Width, Properties.Resources.PauseButton.Width);
             this.btnPause.TabIndex = 2;
             this.btnPause.Image = Properties.Resources.PauseButton;
-            this.btnPause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnPause.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
 
             this.btnPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPause.FlatAppearance.BorderSize = 0;
@@ -97,8 +97,8 @@
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(Properties.Resources.StopButton.Width, Properties.Resources.StopButton.Height);
             this.btnStop.TabIndex = 3;
-            this.btnStop.BackgroundImage = Properties.Resources.StopButton;
-            this.btnStop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnStop.Image = Properties.Resources.StopButton;
+            this.btnStop.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
 
             this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStop.FlatAppearance.BorderSize = 0;
