@@ -39,6 +39,7 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.trackbarVolume = new System.Windows.Forms.TrackBar();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackbarVolume)).BeginInit();
             this.SuspendLayout();
@@ -141,11 +142,20 @@
             this.trackbarVolume.TickFrequency = 10;
             this.trackbarVolume.ValueChanged += new System.EventHandler(this.trackbarVolume_ValueChanged);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(103, 96);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(0, 13);
+            this.label2.TabIndex = 9;
+            // 
             // PlayerWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(570, 136);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.trackbarVolume);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
@@ -179,7 +189,7 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TrackBar trackbarVolume;
-
+        private System.Windows.Forms.Label label2;
     }
 }
 

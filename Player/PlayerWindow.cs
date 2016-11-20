@@ -8,6 +8,7 @@ using CSCore.CoreAudioAPI;
 using CSCore.SoundOut;
 using CSCore.Streams;
 using Player;
+using System.IO;
 
 namespace Player
 {
@@ -43,9 +44,10 @@ namespace Player
                 {
                     _musicPlayer.Open(openFileDialog.FileName, (MMDevice)comboBox1.SelectedItem);
                     trackbarVolume.Value = _musicPlayer.Volume;
-
+                    _musicPlayer.Name = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
                     btnPlay.Enabled = true;
                     btnPause.Enabled = btnStop.Enabled = false;
+                    label2.Text =_musicPlayer.Name;
                 }
                 catch (Exception ex)
                 {
@@ -79,6 +81,7 @@ namespace Player
             if (_musicPlayer.PlaybackState != PlaybackState.Stopped)
             {
                 _musicPlayer.Stop();
+                _musicPlayer.Name = "";
                 btnPlay.Enabled = btnStop.Enabled = btnPause.Enabled = false;
             }
         }
