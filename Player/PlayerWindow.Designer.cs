@@ -59,31 +59,52 @@
             this.btnPlay.Enabled = false;
             this.btnPlay.Location = new System.Drawing.Point(93, 39);
             this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(75, 23);
+            this.btnPlay.Size = new System.Drawing.Size(Properties.Resources.PlayButton.Width, Properties.Resources.PlayButton.Width);
             this.btnPlay.TabIndex = 1;
-            this.btnPlay.Text = "Play";
+            this.btnPlay.Image = Properties.Resources.PlayButton;
+            this.btnPlay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+
+            this.btnPlay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPlay.FlatAppearance.BorderSize = 0;
+            this.btnPlay.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnPlay.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+
             this.btnPlay.UseVisualStyleBackColor = true;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
             // btnPause
             // 
             this.btnPause.Enabled = false;
-            this.btnPause.Location = new System.Drawing.Point(174, 39);
+            this.btnPause.Location = new System.Drawing.Point(132, 39);
             this.btnPause.Name = "btnPause";
-            this.btnPause.Size = new System.Drawing.Size(75, 23);
+            this.btnPause.Size = new System.Drawing.Size(Properties.Resources.PauseButton.Width, Properties.Resources.PauseButton.Width);
             this.btnPause.TabIndex = 2;
-            this.btnPause.Text = "Pause";
+            this.btnPause.Image = Properties.Resources.PauseButton;
+            this.btnPause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+
+            this.btnPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPause.FlatAppearance.BorderSize = 0;
+            this.btnPause.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnPause.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+
             this.btnPause.UseVisualStyleBackColor = true;
             this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
             // 
             // btnStop
             // 
             this.btnStop.Enabled = false;
-            this.btnStop.Location = new System.Drawing.Point(255, 39);
+            this.btnStop.Location = new System.Drawing.Point(171, 40);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(75, 23);
+            this.btnStop.Size = new System.Drawing.Size(Properties.Resources.StopButton.Width, Properties.Resources.StopButton.Height);
             this.btnStop.TabIndex = 3;
-            this.btnStop.Text = "Stop";
+            this.btnStop.BackgroundImage = Properties.Resources.StopButton;
+            this.btnStop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+
+            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStop.FlatAppearance.BorderSize = 0;
+            this.btnStop.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnStop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+
             this.btnStop.UseVisualStyleBackColor = true;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 

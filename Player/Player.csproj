@@ -171,6 +171,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\PlayButton.png" />
+    <None Include="Resources\PauseButton.png" />
+    <None Include="Resources\StopButton.png" />
     <Content Include="Resources\Ypf-Transformers-Folder-music-share.ico" />
   </ItemGroup>
   <ItemGroup>
