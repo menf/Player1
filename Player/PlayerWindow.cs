@@ -158,6 +158,28 @@ namespace Player
             return names;
         }
 
+
+
+        private void addToPlaylist_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = CodecFactory.SupportedFilesFilterEn,
+                Multiselect = true
+            };
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                foreach(String file in openFileDialog.FileNames)
+                {
+                    _musicPlayer.addToPlaylist(Path.GetFileNameWithoutExtension(file), file);
+                    
+                }
+                this.playlistBox.DataSource = this.getPlaylistSongNames();
+            }
+        }
+
+
         private void playlist_doubleClicked(object sender, EventArgs e)
         {
             // Get the currently selected item in the ListBox.

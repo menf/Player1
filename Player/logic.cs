@@ -161,6 +161,15 @@ namespace Player
         }
 
 
+        public void savePlaylist()
+        {
+            StreamWriter file = new StreamWriter(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "/Resources/playlist.cyk");
+            foreach(KeyValuePair<string,string> item in _playlist)
+            {
+                file.WriteLine(item.Value);
+            }
+            file.Close();
+        }
 
         public Dictionary<String,String> getPlaylist()
         {

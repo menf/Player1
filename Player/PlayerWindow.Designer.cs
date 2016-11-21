@@ -196,7 +196,7 @@ namespace Player
             this.btnAddToPlaylist.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
 
             this.btnAddToPlaylist.UseVisualStyleBackColor = true;
-            this.btnAddToPlaylist.Click += new System.EventHandler(this.btnStop_Click); //dodac handler
+            this.btnAddToPlaylist.Click += new System.EventHandler(this.addToPlaylist_Click); 
 
             //
             //RemoveFromPlaylistButton
