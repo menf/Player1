@@ -45,8 +45,9 @@ namespace Player
             {
                 try
                 {
+                    
                     _musicPlayer.Open(openFileDialog.FileName, (MMDevice)comboBox1.SelectedItem);
-                    trackbarVolume.Value = _musicPlayer.Volume;
+                    _musicPlayer.Volume = trackbarVolume.Value;
                     _musicPlayer.Name = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
                     btnPlay.Enabled = true;
                     btnPause.Enabled = btnStop.Enabled = false;
@@ -143,6 +144,9 @@ namespace Player
             }
         }
 
+
+
+
         private List<string> getPlaylistSongNames()
         {
             List<string> names = new List<string>();
@@ -153,6 +157,38 @@ namespace Player
             }
             return names;
         }
+
+        private void playlist_doubleClicked(object sender, EventArgs e)
+        {
+            // Get the currently selected item in the ListBox.
+            string curItem = playlistBox.SelectedItem.ToString();
+            PlaybackState state = _musicPlayer.PlaybackState;
+            try
+            {
+                _musicPlayer.Open(_musicPlayer.getPlaylist()[curItem], (MMDevice)comboBox1.SelectedItem);              
+                _musicPlayer.Name = curItem;
+                label2.Text = _musicPlayer.Name;
+                btnPlay.Enabled = true;
+                btnPause.Enabled = btnStop.Enabled = false;
+                _musicPlayer.Volume = trackbarVolume.Value;
+
+                if (state == PlaybackState.Playing)
+                {
+                   
+                        _musicPlayer.Play();
+                        btnPlay.Enabled = false;
+                        btnPause.Enabled = btnStop.Enabled = true;
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Could not open file: " + ex.Message);
+            }
+            
+        }
+
 
 
         private void Form1_Load(object sender, EventArgs e)

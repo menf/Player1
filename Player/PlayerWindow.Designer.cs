@@ -1,4 +1,7 @@
-﻿namespace Player
+﻿using System;
+using System.Windows.Forms;
+
+namespace Player
 {
     partial class PlayerWindow
     {
@@ -46,6 +49,7 @@
    
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackbarVolume)).BeginInit();
+
             this.SuspendLayout();
             // 
             // btnOpen
@@ -165,7 +169,7 @@
             this.trackbarVolume.Size = new System.Drawing.Size(220, 45);
             this.trackbarVolume.TabIndex = 8;
             this.trackbarVolume.TickFrequency = 10;
-            
+            trackbarVolume.Value = _musicPlayer.Volume;
             this.trackbarVolume.ValueChanged += new System.EventHandler(this.trackbarVolume_ValueChanged);
             // 
             // label2
@@ -224,7 +228,7 @@
             this.playlistBox.Height = 150;
             this.playlistBox.TabIndex = 12;
             this.playlistBox.DataSource = getPlaylistSongNames();
-           
+            this.playlistBox.MouseDoubleClick += new MouseEventHandler(this.playlist_doubleClicked);
 
 
             // 
@@ -261,6 +265,7 @@
 
         }
 
+  
         #endregion
 
         private System.Windows.Forms.Button btnOpen;
