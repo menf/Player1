@@ -175,14 +175,13 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(0, 13);
             this.label2.TabIndex = 9;
-
             //
             //AddToPlaylistButton
             //
             this.btnAddToPlaylist.Enabled = true;
             this.btnAddToPlaylist.Location = new System.Drawing.Point(380, 100);
             this.btnAddToPlaylist.Name = "btnAdd";
-            this.btnAddToPlaylist.Size = new System.Drawing.Size(Properties.Resources.AddButton.Width, Properties.Resources.AddButton.Height);
+            this.btnAddToPlaylist.Size = new System.Drawing.Size(Properties.Resources.AddButton.Width+10, Properties.Resources.AddButton.Height+10);
             this.btnAddToPlaylist.TabIndex = 10;
             this.btnAddToPlaylist.Image = Properties.Resources.AddButton;
             this.btnAddToPlaylist.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -201,7 +200,7 @@
             this.btnDeleteFromPlaylist.Enabled = true;
             this.btnDeleteFromPlaylist.Location = new System.Drawing.Point(380, 135);
             this.btnDeleteFromPlaylist.Name = "btnRemove";
-            this.btnDeleteFromPlaylist.Size = new System.Drawing.Size(Properties.Resources.RemoveButton.Width, Properties.Resources.RemoveButton.Height);
+            this.btnDeleteFromPlaylist.Size = new System.Drawing.Size(Properties.Resources.RemoveButton.Width+10, Properties.Resources.RemoveButton.Height+10);
             this.btnDeleteFromPlaylist.TabIndex = 11;
             this.btnDeleteFromPlaylist.Image = Properties.Resources.RemoveButton;
             this.btnDeleteFromPlaylist.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;

@@ -21,8 +21,7 @@ namespace Player
 
         public Logic()
         {
-            _playlist = new Dictionary<String,String>();
- 
+            _playlist = new Dictionary<String,String>();          
         }
 
         public PlaybackState PlaybackState

@@ -170,6 +170,7 @@
   <ItemGroup>
     <None Include="Resources\PlayButton.png" />
     <None Include="Resources\PauseButton.png" />
+    <None Include="Resources\playlist.cyk" />
     <None Include="Resources\StopButton.png" />
     <None Include="Resources\AddButton.png" />
     <None Include="Resources\RemoveButton.png" />
