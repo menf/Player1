@@ -33,6 +33,8 @@
             this.btnPlay = new System.Windows.Forms.Button();
             this.btnPause = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
+            this.btnAddToPlaylist = new System.Windows.Forms.Button();
+            this.btnDeleteFromPlaylist = new System.Windows.Forms.Button();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblPosition = new System.Windows.Forms.Label();
@@ -40,6 +42,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.trackbarVolume = new System.Windows.Forms.TrackBar();
             this.label2 = new System.Windows.Forms.Label();
+            this.playlistBox = new System.Windows.Forms.ListBox();
+   
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackbarVolume)).BeginInit();
             this.SuspendLayout();
@@ -171,12 +175,65 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(0, 13);
             this.label2.TabIndex = 9;
+
+            //
+            //AddToPlaylistButton
+            //
+            this.btnAddToPlaylist.Enabled = true;
+            this.btnAddToPlaylist.Location = new System.Drawing.Point(380, 100);
+            this.btnAddToPlaylist.Name = "btnAdd";
+            this.btnAddToPlaylist.Size = new System.Drawing.Size(Properties.Resources.AddButton.Width, Properties.Resources.AddButton.Height);
+            this.btnAddToPlaylist.TabIndex = 10;
+            this.btnAddToPlaylist.Image = Properties.Resources.AddButton;
+            this.btnAddToPlaylist.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+
+            this.btnAddToPlaylist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddToPlaylist.FlatAppearance.BorderSize = 0;
+            this.btnAddToPlaylist.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnAddToPlaylist.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+
+            this.btnAddToPlaylist.UseVisualStyleBackColor = true;
+            this.btnAddToPlaylist.Click += new System.EventHandler(this.btnStop_Click); //dodac handler
+
+            //
+            //RemoveFromPlaylistButton
+            //
+            this.btnDeleteFromPlaylist.Enabled = true;
+            this.btnDeleteFromPlaylist.Location = new System.Drawing.Point(380, 135);
+            this.btnDeleteFromPlaylist.Name = "btnRemove";
+            this.btnDeleteFromPlaylist.Size = new System.Drawing.Size(Properties.Resources.RemoveButton.Width, Properties.Resources.RemoveButton.Height);
+            this.btnDeleteFromPlaylist.TabIndex = 11;
+            this.btnDeleteFromPlaylist.Image = Properties.Resources.RemoveButton;
+            this.btnDeleteFromPlaylist.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+
+            this.btnDeleteFromPlaylist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteFromPlaylist.FlatAppearance.BorderSize = 0;
+            this.btnDeleteFromPlaylist.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnDeleteFromPlaylist.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+
+            this.btnDeleteFromPlaylist.UseVisualStyleBackColor = true;
+            this.btnDeleteFromPlaylist.Click += new System.EventHandler(this.btnStop_Click); //dodac handler
+
+
+            //
+            // playlistBox
+            //
+            // this.playlistBox.DataSource = this._musicPlayer.getPlaylist();
+            this.playlistBox.Location = new System.Drawing.Point(420, 100);
+            this.playlistBox.Name = "playlistBox";
+            this.playlistBox.Width = 150;
+            this.playlistBox.Height = 150;
+            this.playlistBox.TabIndex = 12;
+
+           
+
+
             // 
             // PlayerWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(570, 136);
+            this.ClientSize = new System.Drawing.Size(570, 250);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.trackbarVolume);
             this.Controls.Add(this.label1);
@@ -187,6 +244,9 @@
             this.Controls.Add(this.btnPause);
             this.Controls.Add(this.btnPlay);
             this.Controls.Add(this.btnOpen);
+            this.Controls.Add(this.playlistBox);
+            this.Controls.Add(this.btnAddToPlaylist);
+            this.Controls.Add(this.btnDeleteFromPlaylist);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "PlayerWindow";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
@@ -196,6 +256,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackbarVolume)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
+
+
 
         }
 
@@ -212,6 +275,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TrackBar trackbarVolume;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ListBox playlistBox;
+        private System.Windows.Forms.Button btnAddToPlaylist;
+        private System.Windows.Forms.Button btnDeleteFromPlaylist;
     }
 }
 

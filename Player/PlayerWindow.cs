@@ -9,6 +9,7 @@ using CSCore.SoundOut;
 using CSCore.Streams;
 using Player;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Player
 {
@@ -17,6 +18,8 @@ namespace Player
         private readonly Logic _musicPlayer = new Logic();
         private bool _stopSliderUpdate;
         private readonly ObservableCollection<MMDevice> _devices = new ObservableCollection<MMDevice>();
+        private List<string> _shownList = new List<string>();
+
 
         public PlayerWindow()
         {
