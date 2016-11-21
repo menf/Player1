@@ -143,6 +143,18 @@ namespace Player
             }
         }
 
+        private List<string> getPlaylistSongNames()
+        {
+            List<string> names = new List<string>();
+            Dictionary<string, string> pl = _musicPlayer.getPlaylist();
+            foreach (KeyValuePair<string, string> entry in pl)
+            {
+                names.Add(entry.Key);
+            }
+            return names;
+        }
+
+
         private void Form1_Load(object sender, EventArgs e)
         {
             using (var mmdeviceEnumerator = new MMDeviceEnumerator())

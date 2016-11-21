@@ -5,6 +5,10 @@ using CSCore.SoundOut;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
+using System.Reflection;
+using System.Resources;
+
 namespace Player
 {
     public class Logic : Component
@@ -21,7 +25,15 @@ namespace Player
 
         public Logic()
         {
-            _playlist = new Dictionary<String,String>();          
+            _playlist = new Dictionary<String,String>();
+            string line;
+            StreamReader file = new StreamReader(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "/Resources/playlist.cyk");
+            while ((line = file.ReadLine()) != null)
+            {
+                _playlist.Add(Path.GetFileNameWithoutExtension(line), line);
+            }
+            file.Close();
+
         }
 
         public PlaybackState PlaybackState

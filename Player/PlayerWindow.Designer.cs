@@ -223,7 +223,7 @@
             this.playlistBox.Width = 150;
             this.playlistBox.Height = 150;
             this.playlistBox.TabIndex = 12;
-
+            this.playlistBox.DataSource = getPlaylistSongNames();
            
 
 
