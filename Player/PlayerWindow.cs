@@ -179,6 +179,22 @@ namespace Player
             }
         }
 
+        private void removeFromPlaylist_Click(object sender, EventArgs e)
+        {
+            string curItem = playlistBox.SelectedItem.ToString();
+            int index = playlistBox.SelectedIndex;
+            _musicPlayer.removeFromPlaylist(curItem);
+            playlistBox.DataSource = getPlaylistSongNames();
+            if (index < playlistBox.Items.Count)
+            {
+                playlistBox.SelectedIndex = index;
+            }  
+            else
+            {
+                playlistBox.SelectedIndex = index - 1;
+            }
+        }
+
 
         private void playlist_doubleClicked(object sender, EventArgs e)
         {

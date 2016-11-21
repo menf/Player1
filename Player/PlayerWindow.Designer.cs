@@ -33,7 +33,7 @@ namespace Player
         {
             this.components = new System.ComponentModel.Container();
             this.btnOpen = new System.Windows.Forms.Button();
-            this.btnPlay = new System.Windows.Forms.Button();
+            this.btnPlay = new Button();
             this.btnPause = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnAddToPlaylist = new System.Windows.Forms.Button();
@@ -118,18 +118,18 @@ namespace Player
             // 
             // trackBar1
             // 
-            this.trackBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.trackBar1.Anchor = ((AnchorStyles.Top | AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right);
             this.trackBar1.AutoSize = false;
             this.trackBar1.Location = new System.Drawing.Point(12, 69);
             this.trackBar1.Maximum = 1000;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(545, 20);
             this.trackBar1.TabIndex = 4;
-            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBar1.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
-            this.trackBar1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBar1_MouseDown);
-            this.trackBar1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBar1_MouseUp);
+            this.trackBar1.TickStyle = TickStyle.None;
+            this.trackBar1.ValueChanged += new EventHandler(this.trackBar1_ValueChanged);
+            this.trackBar1.MouseDown += new MouseEventHandler(this.trackBar1_MouseDown);
+            this.trackBar1.MouseUp += new MouseEventHandler(this.trackBar1_MouseUp);
             // 
             // timer1
             // 
@@ -145,7 +145,7 @@ namespace Player
             // 
             // comboBox1
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(93, 12);
             this.comboBox1.Name = "comboBox1";
@@ -190,7 +190,7 @@ namespace Player
             this.btnAddToPlaylist.Image = Properties.Resources.AddButton;
             this.btnAddToPlaylist.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
 
-            this.btnAddToPlaylist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddToPlaylist.FlatStyle = FlatStyle.Flat;
             this.btnAddToPlaylist.FlatAppearance.BorderSize = 0;
             this.btnAddToPlaylist.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnAddToPlaylist.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -209,13 +209,13 @@ namespace Player
             this.btnDeleteFromPlaylist.Image = Properties.Resources.RemoveButton;
             this.btnDeleteFromPlaylist.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
 
-            this.btnDeleteFromPlaylist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteFromPlaylist.FlatStyle = FlatStyle.Flat;
             this.btnDeleteFromPlaylist.FlatAppearance.BorderSize = 0;
             this.btnDeleteFromPlaylist.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnDeleteFromPlaylist.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
 
             this.btnDeleteFromPlaylist.UseVisualStyleBackColor = true;
-            this.btnDeleteFromPlaylist.Click += new System.EventHandler(this.btnStop_Click); //dodac handler
+            this.btnDeleteFromPlaylist.Click += new System.EventHandler(this.removeFromPlaylist_Click);
 
 
             //
