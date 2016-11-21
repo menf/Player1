@@ -46,7 +46,10 @@ namespace Player
             this.trackbarVolume = new System.Windows.Forms.TrackBar();
             this.label2 = new System.Windows.Forms.Label();
             this.playlistBox = new System.Windows.Forms.ListBox();
-   
+            this.volumeLabel = new Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnSavePlaylist = new System.Windows.Forms.Button();
+
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackbarVolume)).BeginInit();
 
@@ -147,7 +150,7 @@ namespace Player
             // 
             this.comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(93, 12);
+            this.comboBox1.Location = new System.Drawing.Point(60, 12);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(237, 21);
             this.comboBox1.TabIndex = 6;
@@ -155,21 +158,31 @@ namespace Player
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 19);
+            this.label1.Location = new System.Drawing.Point(12, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 7;
             this.label1.Text = "Device:";
+
+            //
+            //VolumeLabel
+            //
+            this.volumeLabel.AutoSize = true;
+            this.volumeLabel.Location = new System.Drawing.Point(300, 15);
+            this.volumeLabel.Name = "volumeLabel";
+            this.volumeLabel.TabIndex = 13;
+            this.volumeLabel.Text = "Volume:";
             // 
             // trackbarVolume
             // 
-            this.trackbarVolume.Location = new System.Drawing.Point(337, 16);
+            this.trackbarVolume.Location = new System.Drawing.Point(340, 13);
             this.trackbarVolume.Maximum = 100;
             this.trackbarVolume.Name = "trackbarVolume";
             this.trackbarVolume.Size = new System.Drawing.Size(220, 45);
             this.trackbarVolume.TabIndex = 8;
             this.trackbarVolume.TickFrequency = 10;
             trackbarVolume.Value = _musicPlayer.Volume;
+            this.trackbarVolume.Scroll += new System.EventHandler(this.trackbarVolume_Scroll);
             this.trackbarVolume.ValueChanged += new System.EventHandler(this.trackbarVolume_ValueChanged);
             // 
             // label2
@@ -183,7 +196,7 @@ namespace Player
             //AddToPlaylistButton
             //
             this.btnAddToPlaylist.Enabled = true;
-            this.btnAddToPlaylist.Location = new System.Drawing.Point(380, 100);
+            this.btnAddToPlaylist.Location = new System.Drawing.Point(325, 100);
             this.btnAddToPlaylist.Name = "btnAdd";
             this.btnAddToPlaylist.Size = new System.Drawing.Size(Properties.Resources.AddButton.Width+10, Properties.Resources.AddButton.Height+10);
             this.btnAddToPlaylist.TabIndex = 10;
@@ -202,7 +215,7 @@ namespace Player
             //RemoveFromPlaylistButton
             //
             this.btnDeleteFromPlaylist.Enabled = true;
-            this.btnDeleteFromPlaylist.Location = new System.Drawing.Point(380, 135);
+            this.btnDeleteFromPlaylist.Location = new System.Drawing.Point(325, 135);
             this.btnDeleteFromPlaylist.Name = "btnRemove";
             this.btnDeleteFromPlaylist.Size = new System.Drawing.Size(Properties.Resources.RemoveButton.Width+10, Properties.Resources.RemoveButton.Height+10);
             this.btnDeleteFromPlaylist.TabIndex = 11;
@@ -222,14 +235,23 @@ namespace Player
             // playlistBox
             //
             // this.playlistBox.DataSource = this._musicPlayer.getPlaylist();
-            this.playlistBox.Location = new System.Drawing.Point(420, 100);
+            this.playlistBox.Location = new System.Drawing.Point(365, 100);
             this.playlistBox.Name = "playlistBox";
-            this.playlistBox.Width = 150;
+            this.playlistBox.Width = 200;
             this.playlistBox.Height = 150;
             this.playlistBox.TabIndex = 12;
             this.playlistBox.DataSource = getPlaylistSongNames();
             this.playlistBox.MouseDoubleClick += new MouseEventHandler(this.playlist_doubleClicked);
-
+            // 
+            // btnSavePlaylist
+            // 
+            this.btnSavePlaylist.Location = new System.Drawing.Point(280, 215);
+            this.btnSavePlaylist.Name = "btnSavePlaylist";
+            this.btnSavePlaylist.Size = new System.Drawing.Size(75, 23);
+            this.btnSavePlaylist.TabIndex = 14;
+            this.btnSavePlaylist.Text = "Save Playlist";
+            this.btnSavePlaylist.UseVisualStyleBackColor = true;
+            this.btnSavePlaylist.Click += new System.EventHandler(this.savePlaylist_Click);
 
             // 
             // PlayerWindow
@@ -237,6 +259,8 @@ namespace Player
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(570, 250);
+            this.StartPosition = FormStartPosition.CenterScreen;
+
             this.Controls.Add(this.label2);
             this.Controls.Add(this.trackbarVolume);
             this.Controls.Add(this.label1);
@@ -250,6 +274,9 @@ namespace Player
             this.Controls.Add(this.playlistBox);
             this.Controls.Add(this.btnAddToPlaylist);
             this.Controls.Add(this.btnDeleteFromPlaylist);
+            this.Controls.Add(this.volumeLabel);
+            this.Controls.Add(this.btnSavePlaylist);
+            this.MaximizeBox = false;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "PlayerWindow";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
@@ -259,13 +286,19 @@ namespace Player
             ((System.ComponentModel.ISupportInitialize)(this.trackbarVolume)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+            
 
 
 
 
         }
 
-  
+        private void TrackbarVolume_Scroll(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+
         #endregion
 
         private System.Windows.Forms.Button btnOpen;
@@ -282,6 +315,9 @@ namespace Player
         private System.Windows.Forms.ListBox playlistBox;
         private System.Windows.Forms.Button btnAddToPlaylist;
         private System.Windows.Forms.Button btnDeleteFromPlaylist;
+        private System.Windows.Forms.Label volumeLabel;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button btnSavePlaylist;
     }
 }
 

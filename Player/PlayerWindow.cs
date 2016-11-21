@@ -252,5 +252,16 @@ namespace Player
         {
             _musicPlayer.Volume = trackbarVolume.Value;
         }
+
+        private void trackbarVolume_Scroll(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackbarVolume, (trackbarVolume.Value.ToString() + "%"));
+        }
+
+
+        private void savePlaylist_Click(object sender, EventArgs e)
+        {
+            _musicPlayer.savePlaylist();
+        }
     }
 }
