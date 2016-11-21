@@ -81,8 +81,9 @@ namespace Player
             if (_musicPlayer.PlaybackState != PlaybackState.Stopped)
             {
                 _musicPlayer.Stop();
-                _musicPlayer.Name = "";
-                btnPlay.Enabled = btnStop.Enabled = btnPause.Enabled = false;
+                _musicPlayer.Position = TimeSpan.Zero;
+                btnPlay.Enabled = true;
+                btnStop.Enabled = btnPause.Enabled = false;
             }
         }
 
@@ -106,13 +107,27 @@ namespace Player
         private void trackBar1_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
+            {
                 _stopSliderUpdate = true;
+            }
+            if (!btnPlay.Enabled)
+            {
+                _musicPlayer.Pause();
+            }
+                
         }
 
         private void trackBar1_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
+            {
                 _stopSliderUpdate = false;
+            }
+            if (!btnPlay.Enabled)
+            {
+                _musicPlayer.Play();
+            }
+
         }
 
         private void trackBar1_ValueChanged(object sender, EventArgs e)

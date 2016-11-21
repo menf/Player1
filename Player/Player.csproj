@@ -116,9 +116,6 @@
     <Compile Include="Logic.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="PlayerWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,12 +194,6 @@
       <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="MainWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
