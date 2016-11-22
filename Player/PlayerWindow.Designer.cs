@@ -55,16 +55,19 @@ namespace Player
             // 
             // btnOpen
             // 
+            this.btnOpen.BackColor = System.Drawing.Color.Transparent;
+            this.btnOpen.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnOpen.Location = new System.Drawing.Point(12, 39);
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.Size = new System.Drawing.Size(75, 23);
             this.btnOpen.TabIndex = 0;
             this.btnOpen.Text = "Open";
-            this.btnOpen.UseVisualStyleBackColor = true;
+            this.btnOpen.UseVisualStyleBackColor = false;
             this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
             // btnPlay
             // 
+            this.btnPlay.BackColor = System.Drawing.Color.Transparent;
             this.btnPlay.Enabled = false;
             this.btnPlay.FlatAppearance.BorderSize = 0;
             this.btnPlay.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -75,11 +78,12 @@ namespace Player
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(23, 23);
             this.btnPlay.TabIndex = 1;
-            this.btnPlay.UseVisualStyleBackColor = true;
+            this.btnPlay.UseVisualStyleBackColor = false;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
             // btnPause
             // 
+            this.btnPause.BackColor = System.Drawing.Color.Transparent;
             this.btnPause.Enabled = false;
             this.btnPause.FlatAppearance.BorderSize = 0;
             this.btnPause.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -90,11 +94,12 @@ namespace Player
             this.btnPause.Name = "btnPause";
             this.btnPause.Size = new System.Drawing.Size(23, 23);
             this.btnPause.TabIndex = 2;
-            this.btnPause.UseVisualStyleBackColor = true;
+            this.btnPause.UseVisualStyleBackColor = false;
             this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
             // 
             // btnStop
             // 
+            this.btnStop.BackColor = System.Drawing.Color.Transparent;
             this.btnStop.Enabled = false;
             this.btnStop.FlatAppearance.BorderSize = 0;
             this.btnStop.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -105,11 +110,12 @@ namespace Player
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(23, 22);
             this.btnStop.TabIndex = 3;
-            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.UseVisualStyleBackColor = false;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // btnAddToPlaylist
             // 
+            this.btnAddToPlaylist.BackColor = System.Drawing.Color.Transparent;
             this.btnAddToPlaylist.FlatAppearance.BorderSize = 0;
             this.btnAddToPlaylist.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnAddToPlaylist.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -119,11 +125,12 @@ namespace Player
             this.btnAddToPlaylist.Name = "btnAddToPlaylist";
             this.btnAddToPlaylist.Size = new System.Drawing.Size(35, 35);
             this.btnAddToPlaylist.TabIndex = 10;
-            this.btnAddToPlaylist.UseVisualStyleBackColor = true;
+            this.btnAddToPlaylist.UseVisualStyleBackColor = false;
             this.btnAddToPlaylist.Click += new System.EventHandler(this.addToPlaylist_Click);
             // 
             // btnDeleteFromPlaylist
             // 
+            this.btnDeleteFromPlaylist.BackColor = System.Drawing.Color.Transparent;
             this.btnDeleteFromPlaylist.FlatAppearance.BorderSize = 0;
             this.btnDeleteFromPlaylist.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnDeleteFromPlaylist.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -133,7 +140,7 @@ namespace Player
             this.btnDeleteFromPlaylist.Name = "btnDeleteFromPlaylist";
             this.btnDeleteFromPlaylist.Size = new System.Drawing.Size(35, 35);
             this.btnDeleteFromPlaylist.TabIndex = 11;
-            this.btnDeleteFromPlaylist.UseVisualStyleBackColor = true;
+            this.btnDeleteFromPlaylist.UseVisualStyleBackColor = false;
             this.btnDeleteFromPlaylist.Click += new System.EventHandler(this.removeFromPlaylist_Click);
             // 
             // trackBar1
@@ -158,6 +165,7 @@ namespace Player
             // 
             // lblPosition
             // 
+            this.lblPosition.BackColor = System.Drawing.Color.Transparent;
             this.lblPosition.Location = new System.Drawing.Point(3, 92);
             this.lblPosition.Name = "lblPosition";
             this.lblPosition.Size = new System.Drawing.Size(100, 23);
@@ -166,6 +174,7 @@ namespace Player
             // comboBox1
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(60, 12);
             this.comboBox1.Name = "comboBox1";
@@ -175,6 +184,7 @@ namespace Player
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Location = new System.Drawing.Point(12, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
@@ -183,6 +193,7 @@ namespace Player
             // 
             // trackbarVolume
             // 
+            this.trackbarVolume.BackColor = System.Drawing.Color.Maroon;
             this.trackbarVolume.Location = new System.Drawing.Point(340, 13);
             this.trackbarVolume.Maximum = 100;
             this.trackbarVolume.Name = "trackbarVolume";
@@ -191,10 +202,12 @@ namespace Player
             this.trackbarVolume.TickFrequency = 10;
             this.trackbarVolume.Scroll += new System.EventHandler(this.trackbarVolume_Scroll);
             this.trackbarVolume.ValueChanged += new System.EventHandler(this.trackbarVolume_ValueChanged);
+            
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Location = new System.Drawing.Point(95, 92);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(0, 13);
@@ -202,15 +215,17 @@ namespace Player
             // 
             // playlistBox
             // 
+            this.playlistBox.BackColor = System.Drawing.Color.Maroon;
             this.playlistBox.Location = new System.Drawing.Point(365, 110);
             this.playlistBox.Name = "playlistBox";
-            this.playlistBox.Size = new System.Drawing.Size(200, 137);
+            this.playlistBox.Size = new System.Drawing.Size(200, 134);
             this.playlistBox.TabIndex = 12;
             this.playlistBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.playlist_doubleClicked);
             // 
             // volumeLabel
             // 
             this.volumeLabel.AutoSize = true;
+            this.volumeLabel.BackColor = System.Drawing.Color.Transparent;
             this.volumeLabel.Location = new System.Drawing.Point(300, 15);
             this.volumeLabel.Name = "volumeLabel";
             this.volumeLabel.Size = new System.Drawing.Size(45, 13);
@@ -219,18 +234,22 @@ namespace Player
             // 
             // btnSavePlaylist
             // 
+            this.btnSavePlaylist.BackColor = System.Drawing.Color.Transparent;
+            this.btnSavePlaylist.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnSavePlaylist.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSavePlaylist.Location = new System.Drawing.Point(280, 221);
             this.btnSavePlaylist.Name = "btnSavePlaylist";
             this.btnSavePlaylist.Size = new System.Drawing.Size(75, 23);
             this.btnSavePlaylist.TabIndex = 14;
             this.btnSavePlaylist.Text = "Save Playlist";
-            this.btnSavePlaylist.UseVisualStyleBackColor = true;
+            this.btnSavePlaylist.UseVisualStyleBackColor = false;
             this.btnSavePlaylist.Click += new System.EventHandler(this.savePlaylist_Click);
             // 
             // PlayerWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::Player.Properties.Resources.html_color_codes_color_tutorials_hero_00e10b1f;
             this.ClientSize = new System.Drawing.Size(570, 250);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.trackbarVolume);

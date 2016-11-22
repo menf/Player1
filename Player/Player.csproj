@@ -183,28 +183,30 @@
     <None Include="Resources\StopButton.png" />
     <None Include="Resources\AddButton.png" />
     <None Include="Resources\RemoveButton.png" />
-    <None Include="Resources\1.png" />
+    <Resource Include="Resources\html-color-codes-color-tutorials-hero-00e10b1f.jpg" />
+    <Resource Include="Resources\Light-Pink-Backgrounds.jpg" />
+    <Resource Include="Resources\Light-Pink-HD-Image.jpg" />
     <Content Include="Resources\Ypf-Transformers-Folder-music-share.ico" />
   </ItemGroup>
   <ItemGroup>
     <PublishFile Include="Microsoft.QualityTools.Testing.Fakes">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>

@@ -58,6 +58,7 @@ namespace Player
         [STAThread]
         static void Main(string[] args)
         {
+
             InitializeWindows();
          //   tui userInterface = new tui();
          //  userInterface.loadInterface();

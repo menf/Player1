@@ -73,6 +73,36 @@ namespace Player.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap html_color_codes_color_tutorials_hero_00e10b1f {
+            get {
+                object obj = ResourceManager.GetObject("html_color_codes_color_tutorials_hero_00e10b1f", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Light_Pink_Backgrounds {
+            get {
+                object obj = ResourceManager.GetObject("Light_Pink_Backgrounds", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Light_Pink_HD_Image {
+            get {
+                object obj = ResourceManager.GetObject("Light_Pink_HD_Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap PauseButton {
             get {
                 object obj = ResourceManager.GetObject("PauseButton", resourceCulture);
