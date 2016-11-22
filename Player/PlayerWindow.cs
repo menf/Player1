@@ -106,7 +106,13 @@ namespace Player
             {
                 double perc = position.TotalMilliseconds / length.TotalMilliseconds * trackBar1.Maximum;
                 trackBar1.Value = (int)perc;
+                if (trackBar1.Value >= (trackBar1.Maximum - 1) && _musicPlayer.getPlaylist().ContainsKey(_musicPlayer.Name))
+                {
+                    nextSong();
+                }
             }
+
+           
 
         }
 
@@ -147,6 +153,7 @@ namespace Player
                 TimeSpan position = TimeSpan.FromMilliseconds(_musicPlayer.Length.TotalMilliseconds * perc);
                 _musicPlayer.Position = position;
             }
+           
         }
 
 
@@ -278,31 +285,32 @@ namespace Player
 
         private void nextSong()
         {
-            if(_musicPlayer.Position >= _musicPlayer.Length)
+            int i = playlistBox.SelectedIndex + 1;
+            if (i >= playlistBox.Items.Count)
+            {
+                i = 0;
+            }
+            playlistBox.SelectedIndex = i;
+           string curItem = playlistBox.SelectedItem.ToString();
+
+            try
             {
 
-                playlistBox.SelectedIndex++;
-                if (playlistBox.SelectedIndex >= playlistBox.Items.Count)
-                {
-                    playlistBox.SelectedIndex = 0;
-                }
-
-                string curItem = playlistBox.SelectedItem.ToString();
-
-                try
-                {
-                    _musicPlayer.Open(_musicPlayer.getPlaylist()[curItem], (MMDevice)comboBox1.SelectedItem);
-                    _musicPlayer.Name = curItem;
-                    label2.Text = _musicPlayer.Name;
-                    _musicPlayer.Volume = trackbarVolume.Value;
-                    _musicPlayer.Play();
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Could not open file: " + ex.Message);
-                }
+                _musicPlayer.Stop();
+                btnPlay.Enabled = true;
+                btnPause.Enabled = btnStop.Enabled = false;
+                _musicPlayer.Open(_musicPlayer.getPlaylist()[curItem], (MMDevice)comboBox1.SelectedItem);
+                _musicPlayer.Name = curItem;
+                label2.Text = _musicPlayer.Name;
+                _musicPlayer.Volume = trackbarVolume.Value;
+                _musicPlayer.Play();
+                btnPlay.Enabled = false;
+                btnPause.Enabled = btnStop.Enabled = true;
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Could not open file: " + ex.Message);
+            }  
         }
 
 
