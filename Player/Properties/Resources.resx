@@ -121,19 +121,28 @@
   <data name="AddButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AddButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="html_color_codes_color_tutorials_hero_00e10b1f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\html-color-codes-color-tutorials-hero-00e10b1f.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Light_Pink_Backgrounds" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Light-Pink-Backgrounds.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Light_Pink_HD_Image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Light-Pink-HD-Image.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="PauseButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PauseButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PlayButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PlayButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="playlist" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\playlist.cyk;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="RemoveButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RemoveButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="StopButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\StopButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="playlist" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\playlist.cyk;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>
