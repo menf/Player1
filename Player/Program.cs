@@ -59,13 +59,13 @@ namespace Player
         static void Main(string[] args)
         {
             InitializeWindows();
-            tui userInterface = new tui();
-           userInterface.loadInterface();
+         //   tui userInterface = new tui();
+         //  userInterface.loadInterface();
             
             /// testy dzialania
             
 
-            Console.ReadLine();
+           // Console.ReadLine();
         }
     }
 }

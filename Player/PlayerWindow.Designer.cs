@@ -115,9 +115,9 @@ namespace Player
             this.btnAddToPlaylist.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnAddToPlaylist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddToPlaylist.Image = global::Player.Properties.Resources.AddButton;
-            this.btnAddToPlaylist.Location = new System.Drawing.Point(325, 100);
+            this.btnAddToPlaylist.Location = new System.Drawing.Point(325, 105);
             this.btnAddToPlaylist.Name = "btnAddToPlaylist";
-            this.btnAddToPlaylist.Size = new System.Drawing.Size(25, 25);
+            this.btnAddToPlaylist.Size = new System.Drawing.Size(35, 35);
             this.btnAddToPlaylist.TabIndex = 10;
             this.btnAddToPlaylist.UseVisualStyleBackColor = true;
             this.btnAddToPlaylist.Click += new System.EventHandler(this.addToPlaylist_Click);
@@ -129,9 +129,9 @@ namespace Player
             this.btnDeleteFromPlaylist.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnDeleteFromPlaylist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteFromPlaylist.Image = global::Player.Properties.Resources.RemoveButton;
-            this.btnDeleteFromPlaylist.Location = new System.Drawing.Point(325, 135);
+            this.btnDeleteFromPlaylist.Location = new System.Drawing.Point(325, 140);
             this.btnDeleteFromPlaylist.Name = "btnDeleteFromPlaylist";
-            this.btnDeleteFromPlaylist.Size = new System.Drawing.Size(25, 25);
+            this.btnDeleteFromPlaylist.Size = new System.Drawing.Size(35, 35);
             this.btnDeleteFromPlaylist.TabIndex = 11;
             this.btnDeleteFromPlaylist.UseVisualStyleBackColor = true;
             this.btnDeleteFromPlaylist.Click += new System.EventHandler(this.removeFromPlaylist_Click);
@@ -195,16 +195,16 @@ namespace Player
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 164);
+            this.label2.Location = new System.Drawing.Point(95, 92);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(0, 13);
             this.label2.TabIndex = 9;
             // 
             // playlistBox
             // 
-            this.playlistBox.Location = new System.Drawing.Point(365, 100);
+            this.playlistBox.Location = new System.Drawing.Point(365, 110);
             this.playlistBox.Name = "playlistBox";
-            this.playlistBox.Size = new System.Drawing.Size(200, 147);
+            this.playlistBox.Size = new System.Drawing.Size(200, 137);
             this.playlistBox.TabIndex = 12;
             this.playlistBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.playlist_doubleClicked);
             // 
@@ -219,7 +219,7 @@ namespace Player
             // 
             // btnSavePlaylist
             // 
-            this.btnSavePlaylist.Location = new System.Drawing.Point(280, 215);
+            this.btnSavePlaylist.Location = new System.Drawing.Point(280, 221);
             this.btnSavePlaylist.Name = "btnSavePlaylist";
             this.btnSavePlaylist.Size = new System.Drawing.Size(75, 23);
             this.btnSavePlaylist.TabIndex = 14;
