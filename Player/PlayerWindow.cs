@@ -10,7 +10,7 @@ using CSCore.Streams;
 using Player;
 using System.IO;
 using System.Collections.Generic;
-
+using System.Threading;
 namespace Player
 {
     public partial class PlayerWindow : Form
@@ -19,7 +19,7 @@ namespace Player
         private bool _stopSliderUpdate;
         private readonly ObservableCollection<MMDevice> _devices = new ObservableCollection<MMDevice>();
         private List<string> _shownList = new List<string>();
-
+        public delegate void InvokeDelegate();
 
         public PlayerWindow()
         {
@@ -232,11 +232,12 @@ namespace Player
                 {
                    
                         _musicPlayer.Play();
-                        btnPlay.Enabled = false;
-                        btnPause.Enabled = btnStop.Enabled = true;
+                    BeginInvoke(new InvokeDelegate(InvokeMethod));
 
                 }
-               
+
+              
+
 
             }
             catch (Exception ex)
@@ -246,7 +247,11 @@ namespace Player
             
         }
 
-
+        public void InvokeMethod()
+        {
+            btnPlay.Enabled = false;
+            btnPause.Enabled = btnStop.Enabled = true;
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -304,8 +309,8 @@ namespace Player
                 label2.Text = _musicPlayer.Name;
                 _musicPlayer.Volume = trackbarVolume.Value;
                 _musicPlayer.Play();
-                btnPlay.Enabled = false;
-                btnPause.Enabled = btnStop.Enabled = true;
+                BeginInvoke(new InvokeDelegate(InvokeMethod));
+              
             }
             catch (Exception ex)
             {
