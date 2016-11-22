@@ -201,6 +201,12 @@ namespace Player
             // Get the currently selected item in the ListBox.
             string curItem = playlistBox.SelectedItem.ToString();
             PlaybackState state = _musicPlayer.PlaybackState;
+           
+                _musicPlayer.Stop();
+                _musicPlayer.Position = TimeSpan.Zero;
+                btnPlay.Enabled = true;
+                btnStop.Enabled = btnPause.Enabled = false;
+           
             try
             {
                 _musicPlayer.Open(_musicPlayer.getPlaylist()[curItem], (MMDevice)comboBox1.SelectedItem);              
@@ -210,7 +216,7 @@ namespace Player
                 btnPause.Enabled = btnStop.Enabled = false;
                 _musicPlayer.Volume = trackbarVolume.Value;
 
-                if (state == PlaybackState.Playing)
+                if (state != PlaybackState.Playing)
                 {
                    
                         _musicPlayer.Play();
@@ -218,6 +224,7 @@ namespace Player
                         btnPause.Enabled = btnStop.Enabled = true;
 
                 }
+               
 
             }
             catch (Exception ex)
