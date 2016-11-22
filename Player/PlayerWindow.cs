@@ -228,13 +228,8 @@ namespace Player
                 btnPause.Enabled = btnStop.Enabled = false;
                 _musicPlayer.Volume = trackbarVolume.Value;
 
-                if (state != PlaybackState.Playing)
-                {
-                   
                         _musicPlayer.Play();
                     BeginInvoke(new InvokeDelegate(InvokeMethod));
-
-                }
 
               
 
