@@ -183,6 +183,7 @@
     <None Include="Resources\StopButton.png" />
     <None Include="Resources\AddButton.png" />
     <None Include="Resources\RemoveButton.png" />
+    <None Include="Resources\1.png" />
     <Content Include="Resources\Ypf-Transformers-Folder-music-share.ico" />
   </ItemGroup>
   <ItemGroup>
