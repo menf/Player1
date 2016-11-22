@@ -33,6 +33,7 @@ namespace Player
                 if (_musicPlayer.PlaybackState != PlaybackState.Stopped)
                     btnPlay.Enabled = btnStop.Enabled = btnPause.Enabled = false;
             };
+            this.playlistBox.DataSource = this.getPlaylistSongNames();
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
