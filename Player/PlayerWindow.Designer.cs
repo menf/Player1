@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Windows.Media;
 
 namespace Player
 {
@@ -147,6 +148,7 @@ namespace Player
             // 
             this.trackBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.trackBar1.BackColor = System.Drawing.ColorTranslator.FromHtml("#F3393A");
             this.trackBar1.AutoSize = false;
             this.trackBar1.Location = new System.Drawing.Point(12, 68);
             this.trackBar1.Maximum = 1000;
@@ -193,11 +195,13 @@ namespace Player
             // 
             // trackbarVolume
             // 
-            this.trackbarVolume.BackColor = System.Drawing.Color.Maroon;
-            this.trackbarVolume.Location = new System.Drawing.Point(340, 13);
+            
+            this.trackbarVolume.BackColor = System.Drawing.ColorTranslator.FromHtml("#F3393A");
+            this.trackbarVolume.Location = new System.Drawing.Point(345, 13);
             this.trackbarVolume.Maximum = 100;
             this.trackbarVolume.Name = "trackbarVolume";
-            this.trackbarVolume.Size = new System.Drawing.Size(220, 45);
+            this.trackbarVolume.Size = new System.Drawing.Size(220, 20);
+            this.trackbarVolume.TickStyle = TickStyle.Both;
             this.trackbarVolume.TabIndex = 8;
             this.trackbarVolume.TickFrequency = 10;
             this.trackbarVolume.Scroll += new System.EventHandler(this.trackbarVolume_Scroll);
@@ -215,18 +219,19 @@ namespace Player
             // 
             // playlistBox
             // 
-            this.playlistBox.BackColor = System.Drawing.Color.Maroon;
+            this.playlistBox.BackColor = System.Drawing.ColorTranslator.FromHtml("#F3393A");
             this.playlistBox.Location = new System.Drawing.Point(365, 110);
             this.playlistBox.Name = "playlistBox";
             this.playlistBox.Size = new System.Drawing.Size(200, 134);
             this.playlistBox.TabIndex = 12;
             this.playlistBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.playlist_doubleClicked);
+           
             // 
             // volumeLabel
             // 
             this.volumeLabel.AutoSize = true;
             this.volumeLabel.BackColor = System.Drawing.Color.Transparent;
-            this.volumeLabel.Location = new System.Drawing.Point(300, 15);
+            this.volumeLabel.Location = new System.Drawing.Point(300, 26);
             this.volumeLabel.Name = "volumeLabel";
             this.volumeLabel.Size = new System.Drawing.Size(45, 13);
             this.volumeLabel.TabIndex = 13;
