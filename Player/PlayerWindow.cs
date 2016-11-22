@@ -213,33 +213,35 @@ namespace Player
             // Get the currently selected item in the ListBox.
             string curItem = playlistBox.SelectedItem.ToString();
             PlaybackState state = _musicPlayer.PlaybackState;
-           
+           if(curItem != _musicPlayer.Name)
+            {
                 _musicPlayer.Stop();
                 _musicPlayer.Position = TimeSpan.Zero;
                 btnPlay.Enabled = true;
                 btnStop.Enabled = btnPause.Enabled = false;
-           
-            try
-            {
-                _musicPlayer.Open(_musicPlayer.getPlaylist()[curItem], (MMDevice)comboBox1.SelectedItem);              
-                _musicPlayer.Name = curItem;
-                label2.Text = _musicPlayer.Name;
-                btnPlay.Enabled = true;
-                btnPause.Enabled = btnStop.Enabled = false;
-                _musicPlayer.Volume = trackbarVolume.Value;
 
-                        _musicPlayer.Play();
+                try
+                {
+                    _musicPlayer.Open(_musicPlayer.getPlaylist()[curItem], (MMDevice)comboBox1.SelectedItem);
+                    _musicPlayer.Name = curItem;
+                    label2.Text = _musicPlayer.Name;
+                    btnPlay.Enabled = true;
+                    btnPause.Enabled = btnStop.Enabled = false;
+                    _musicPlayer.Volume = trackbarVolume.Value;
+
+                    _musicPlayer.Play();
                     BeginInvoke(new InvokeDelegate(InvokeMethod));
 
-              
 
 
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Could not open file: " + ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Could not open file: " + ex.Message);
-            }
-            
+    
         }
 
         public void InvokeMethod()
