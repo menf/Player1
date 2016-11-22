@@ -107,7 +107,11 @@ namespace Player
                 double perc = position.TotalMilliseconds / length.TotalMilliseconds * trackBar1.Maximum;
                 trackBar1.Value = (int)perc;
             }
+
         }
+
+       
+
 
         private void trackBar1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -271,5 +275,36 @@ namespace Player
         {
             _musicPlayer.savePlaylist();
         }
+
+        private void nextSong()
+        {
+            if(_musicPlayer.Position >= _musicPlayer.Length)
+            {
+
+                playlistBox.SelectedIndex++;
+                if (playlistBox.SelectedIndex >= playlistBox.Items.Count)
+                {
+                    playlistBox.SelectedIndex = 0;
+                }
+
+                string curItem = playlistBox.SelectedItem.ToString();
+
+                try
+                {
+                    _musicPlayer.Open(_musicPlayer.getPlaylist()[curItem], (MMDevice)comboBox1.SelectedItem);
+                    _musicPlayer.Name = curItem;
+                    label2.Text = _musicPlayer.Name;
+                    _musicPlayer.Volume = trackbarVolume.Value;
+                    _musicPlayer.Play();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Could not open file: " + ex.Message);
+                }
+            }
+        }
+
+
     }
 }
